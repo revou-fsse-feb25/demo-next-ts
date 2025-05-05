@@ -20,7 +20,7 @@ export default function TypeScriptBasicsPage() {
 
   // TODO 4: Add proper type for the event parameter
   // Import the correct event type from React and add it here
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setNewTodoText(e.target.value);
   };
 
@@ -39,7 +39,7 @@ export default function TypeScriptBasicsPage() {
   };
 
   // TODO 7: Add parameter type and return type annotations
-  const toggleTodo = (id) => {
+  const toggleTodo = (id: any) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
