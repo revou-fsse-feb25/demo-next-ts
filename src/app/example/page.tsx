@@ -1,55 +1,45 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 
-// Define Todo interface
-// An interface defines the shape of an object in TypeScript
-// This helps catch errors if you try to use properties that don't exist
-interface Todo {
-  id: number; // Unique identifier for each todo
-  text: string; // The content of the todo item
-  completed: boolean; // Whether the todo is completed or not
-}
+// TODO 1: Define a Todo interface
+// Create an interface that describes the shape of a todo item
+// It should have id, text, and completed properties
 
 export default function TypeScriptBasicsPage() {
-  // useState with TypeScript: We specify the type of state using generics <Type>
-  // This ensures our todos will always follow the Todo interface structure
-  const [todos, setTodos] = useState<Todo[]>([
+  // TODO 2: Add proper type to useState
+  // Use the Todo interface you created and make an array of todos
+  const [todos, setTodos] = useState([
     { id: 1, text: "Learn Next.js", completed: false },
     { id: 2, text: "Learn TypeScript", completed: false },
     { id: 3, text: "Build a project", completed: false },
   ]);
 
-  // For simple types like strings, TypeScript can often infer the type
-  // But it's good practice to specify it explicitly for clarity
-  const [newTodoText, setNewTodoText] = useState<string>("");
+  // TODO 3: Add proper type to useState for the input field
+  const [newTodoText, setNewTodoText] = useState("");
 
-  // Event handlers in TypeScript need to specify the event type
-  // ChangeEvent<HTMLInputElement> is the correct type for input change events
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  // TODO 4: Add proper type for the event parameter
+  // Import the correct event type from React and add it here
+  const handleInputChange = (e) => {
     setNewTodoText(e.target.value);
   };
 
-  // Function with return type annotation
-  // void means this function doesn't return anything
-  const addTodo = (): void => {
+  // TODO 5: Add proper return type annotation to this function
+  const addTodo = () => {
     if (newTodoText.trim()) {
-      // Creating a new todo with the correct type structure
-      const newTodo: Todo = {
-        id: Date.now(), // Using timestamp as unique ID
+      // TODO 6: Add type annotation for the newTodo object
+      const newTodo = {
+        id: Date.now(),
         text: newTodoText,
         completed: false,
       };
-      // Using the spread operator to create a new array with the added todo
       setTodos([...todos, newTodo]);
       setNewTodoText("");
     }
   };
 
-  // Function that takes a parameter with type annotation
-  // This ensures we only call toggleTodo with a number
-  const toggleTodo = (id: number): void => {
-    // Using map to create a new array with the toggled todo
+  // TODO 7: Add parameter type and return type annotations
+  const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -67,7 +57,6 @@ export default function TypeScriptBasicsPage() {
           A simple todo application with TypeScript
         </p>
 
-        {/* Form for adding new todos */}
         <div className="mb-6">
           <div className="flex">
             <input
@@ -86,7 +75,6 @@ export default function TypeScriptBasicsPage() {
           </div>
         </div>
 
-        {/* List of todos - we use TypeScript to ensure we're using the correct properties */}
         <div className="space-y-2">
           {todos.map((todo) => (
             <div
@@ -105,7 +93,6 @@ export default function TypeScriptBasicsPage() {
           ))}
         </div>
 
-        {/* TypeScript example code snippets */}
         <div className="mt-8 space-y-4">
           <div className="bg-gray-800 p-4 rounded">
             <h2 className="text-lg font-medium text-purple-400 mb-3">
