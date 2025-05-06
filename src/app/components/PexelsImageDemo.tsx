@@ -1,9 +1,20 @@
+/*
+COMPONENT LEARNING OBJECTIVES:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Learn to create interfaces for API responses
+5. Working with images in Next.js
+   - TODO 5.1: Use the Next.js Image component in a grid layout
+   - TODO 5.2: Understand responsive image sizing with the sizes prop
+   - TODO 5.3: Learn about fill mode and object-fit
+*/
+
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-// Simplified interfaces
+// TODO 1.1: Notice how we define interfaces for external API data
 interface PexelsPhoto {
   id: number;
   photographer: string;
@@ -15,6 +26,7 @@ interface PexelsPhoto {
 }
 
 export default function PexelsImageDemo() {
+  // Type-safe state with useState<PexelsPhoto[]>
   const [photos, setPhotos] = useState<PexelsPhoto[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -76,7 +88,7 @@ export default function PexelsImageDemo() {
     }
   };
 
-  // Handle form submission
+  // Type-safe event handler
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -124,7 +136,7 @@ export default function PexelsImageDemo() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {photos.map((photo) => (
             <div key={photo.id} className="overflow-hidden rounded-lg">
-              {/* Using width/height instead of fill for better reliability */}
+              {/* TODO 5.1, 5.2, 5.3: Notice Image component usage with fill and sizes */}
               <div className="relative h-48 w-full">
                 <Image
                   src={photo.src.small}

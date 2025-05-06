@@ -1,10 +1,27 @@
+/*
+LEARNING SEQUENCE FOR THIS FILE:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Notice typed data and component props
+2. TypeScript with Next.js Link and Router
+   - TODO 2.1: Use the Link component for navigation
+3. Typed dynamic routes and query parameters
+   - TODO 3.1: Learn to type dynamic route parameters
+   - TODO 3.2: Use the slug parameter from the URL
+   - TODO 3.3: Handle missing data with notFound()
+5. Working with images in Next.js
+   - TODO 5.1: Use the Next.js Image component with proper props
+6. SEO in Next.js
+   - TODO 6.1: Generate dynamic metadata based on content
+*/
+
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Post, PostPageParams } from "../../types";
 
-// Demonstrate dynamic metadata
+// TODO 6.1: Generate dynamic metadata based on the post content
 export async function generateMetadata({ params }: PostPageParams): Promise<Metadata> {
   // In a real app, fetch post data here
   const post = getPostBySlug(params.slug);
@@ -27,7 +44,7 @@ export async function generateMetadata({ params }: PostPageParams): Promise<Meta
   };
 }
 
-// Mock function to get post data - in a real app, this would be an API call
+// TODO 1.1 & 3.2: Mock function to get post data using the slug parameter
 function getPostBySlug(slug: string): Post | undefined {
   const posts: Post[] = [
     {
@@ -67,11 +84,12 @@ function getPostBySlug(slug: string): Post | undefined {
   return posts.find(post => post.slug === slug);
 }
 
-// Type-safe component props
+// TODO 1.1: Interface for component props
 interface CommentSectionProps {
   postId: string;
 }
 
+// Component with proper typing
 function CommentSection({ postId }: CommentSectionProps) {
   return (
     <div className="mt-8 bg-gray-800 p-6 rounded-lg">
@@ -84,15 +102,19 @@ function CommentSection({ postId }: CommentSectionProps) {
   );
 }
 
+// TODO 3.1: Use PostPageParams type for the page component props
 export default function PostPage({ params }: PostPageParams) {
+  // TODO 3.2: Use the slug parameter from the URL
   const post = getPostBySlug(params.slug);
 
+  // TODO 3.3: Handle missing data with notFound()
   if (!post) {
     notFound();
   }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
+      {/* TODO 2.1: Use Link for navigation */}
       <Link
         href="/"
         className="inline-block mb-8 text-blue-400 hover:text-blue-300"
@@ -100,6 +122,7 @@ export default function PostPage({ params }: PostPageParams) {
         ← Back to Home
       </Link>
 
+      {/* TODO 5.1: Use Image component with proper props */}
       <div className="relative h-[400px] mb-8 rounded-lg overflow-hidden">
         <Image
           src={post.coverImage}
@@ -113,6 +136,7 @@ export default function PostPage({ params }: PostPageParams) {
       <header className="mb-8">
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
         <div className="flex items-center space-x-4">
+          {/* TODO 5.1: Another Image component example */}
           <Image
             src={post.author.avatar}
             alt={post.author.name}
@@ -145,6 +169,7 @@ export default function PostPage({ params }: PostPageParams) {
         ))}
       </div>
 
+      {/* TODO 1.1: Pass typed props to the component */}
       <CommentSection postId={post.id} />
     </div>
   );

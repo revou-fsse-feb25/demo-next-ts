@@ -1,3 +1,16 @@
+/*
+COMPONENT LEARNING OBJECTIVES:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Create and use interfaces to define component props
+2. TypeScript with Next.js Link and Router
+   - TODO 2.1: Use the Link component for navigation
+3. Typed dynamic routes and query parameters
+   - TODO 3.1: Learn about typing route parameters (demonstrated in code example)
+5. Working with images in Next.js
+   - TODO 5.1: Use the Next.js Image component with proper props and optimization
+*/
+
 "use client";
 
 import { useState } from "react";
@@ -5,6 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../types";
 
+// TODO 1.1: Define ProductDetailsProps interface
 interface ProductDetailsProps {
   product: Product;
 }
@@ -19,12 +33,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <div>
+      {/* TODO 2.1: Learn about using Link component for navigation */}
       <Link href="/products" className="text-blue-400 hover:text-blue-300 mb-6 inline-block">
         &larr; Back to Products
       </Link>
       
       <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* TODO 5.1: Notice the Image component with optimization */}
           <div className="relative h-64 md:h-auto">
             <Image
               src={product.imageUrl}
@@ -66,6 +82,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </div>
       </div>
       
+      {/* TODO 3.1: Learn about typing route parameters */}
       <div className="mt-8 bg-gray-800 p-6 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">TypeScript with Dynamic Routes</h2>
         <p className="text-gray-300 mb-4">

@@ -1,19 +1,30 @@
+/*
+COMPONENT LEARNING OBJECTIVES:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Learn to create interfaces for structured data
+4. Nested routes and simple private routing
+   - TODO 4.1: Understand basic client-side authentication state
+   - TODO 4.2: Implement conditional rendering based on auth state
+*/
+
 "use client";
 
 import { useState } from "react";
 
 // Simple auth demo component
 export default function AuthDemo() {
+  // TODO 4.1: Notice how we use state to track authentication
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // TypeScript interface for user data
+  // TODO 1.1: Notice how we use TypeScript interface for structured data
   interface UserProfile {
     name: string;
     email: string;
     role: string;
   }
 
-  // Mock user data
+  // Mock user data with proper typing
   const user: UserProfile = {
     name: "Demo User",
     email: "user@example.com",
@@ -37,6 +48,7 @@ export default function AuthDemo() {
         </button>
       </div>
 
+      {/* TODO 4.2: Notice conditional rendering based on authentication state */}
       {isLoggedIn ? (
         <div className="bg-gray-700 p-4 rounded-lg">
           <h3 className="text-xl font-semibold mb-2">User Profile</h3>

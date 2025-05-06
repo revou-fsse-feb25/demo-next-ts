@@ -1,6 +1,21 @@
-# Next.js TypeScript Demo Project
+# Next.js TypeScript Demo Project (Starter)
 
-A modern web application built with Next.js 14, TypeScript, and Tailwind CSS showcasing Next.js features and best practices.
+A modern web application built with Next.js 14, TypeScript, and Tailwind CSS, designed as a step-by-step learning material.
+
+## How to Use This Material
+
+This project is structured as a hands-on workshop. Each step in the learning sequence is scaffolded with `// TODO` comments in the codebase. Code for each step is present but commented out—uncomment and implement as you progress.
+
+**Learning Sequence:**
+
+1. **Understand type-safe props in Next.js components.**
+2. **Utilize TypeScript with the Next.js Link component and Router.**
+3. **Learn to type dynamic routes and query parameters.**
+4. **Explore nested routes and simple private routing.**
+5. **Work with images in Next.js.**
+6. **SEO in Next.js.**
+
+Each step may have multiple TODOs. Only work on the next TODO after completing the previous one. Do not jump ahead!
 
 ## Features
 
@@ -17,15 +32,12 @@ app/
 ├── layout.tsx          # Root layout with theme configuration
 ├── page.tsx            # Home page with navigation and feature showcases
 ├── products/
-│   ├── page.tsx        # Products listing page with all demos
-│   └── [id]/
-│       └── page.tsx    # Dynamic product detail page
-├── components/
-│   ├── ProductCard.tsx # Reusable product card with type-safe props
-│   ├── ProductDetails.tsx # Product details component
-│   ├── ImageDemo.tsx   # Next.js Image component implementation
-│   ├── Todo.tsx        # Todo component example
-│   └── AuthDemo.tsx    # Authentication and protected content demo
+│   ├── page.tsx        # TypeScript features demo page
+├── categories/
+│   └── [slug]/page.tsx # Dynamic category page
+├── posts/
+│   └── [slug]/page.tsx # Dynamic post detail page
+├── components/         # (May contain commented-out demo components)
 └── types/
     └── index.ts        # Shared TypeScript interfaces and types
 ```
@@ -56,3 +68,14 @@ app/
 - **next.config.ts**: Contains Next.js configuration including image domains
 - **tsconfig.json**: TypeScript configuration
 - **tailwind.config.js**: Tailwind CSS customization
+
+## Instructions for Each Step
+
+- Open the relevant file for your current step.
+- Look for `// TODO` comments at the top and in the code.
+- Uncomment and implement the code as described.
+- Only proceed to the next TODO after completing the current one.
+
+---
+
+Happy learning! Follow the sequence for the best experience.

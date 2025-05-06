@@ -1,14 +1,28 @@
+/*
+LEARNING SEQUENCE FOR THIS FILE:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Create and use interfaces for structured data
+   - TODO 1.2: Notice type-safe props in components
+2. TypeScript with Next.js Link and Router
+   - TODO 2.1: Use the Link component for navigation
+3. Typed dynamic routes and query parameters
+   - TODO 3.1: Learn about typing route parameters from code examples
+6. SEO in Next.js
+   - TODO 6.1: Add metadata for SEO
+*/
+
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-// Define metadata for this page
+// TODO 6.1: Notice the metadata export for SEO
 export const metadata: Metadata = {
   title: "TypeScript Features | Next.js Demo",
   description: "Examples of TypeScript features in Next.js",
 };
 
-// Type-safe examples with proper interfaces
+// TODO 1.1: Notice the interface for structuring our demo data
 interface FeatureDemo {
   id: string;
   title: string;
@@ -46,7 +60,8 @@ export function Button({
     id: "typed-routing",
     title: "Type-Safe Routing",
     description: "Define and enforce type safety for route parameters in Next.js.",
-    codeExample: `// Define parameter types
+    codeExample: `// TODO 3.1: Notice how route parameters are typed
+// Define parameter types
 interface PostParams {
   params: {
     slug: string;
@@ -88,7 +103,7 @@ export default function Post({
     description: "Type-safe metadata API for better SEO in Next.js.",
     codeExample: `import { Metadata } from 'next';
 
-// Typed metadata export
+// TODO 6.1: Notice typed metadata export
 export const metadata: Metadata = {
   title: 'Page Title',
   description: 'Page description',
@@ -103,7 +118,7 @@ export const metadata: Metadata = {
   },
 ];
 
-// Type-safe component with interface
+// TODO 1.2: Notice the interface for component props
 interface CodeBlockProps {
   code: string;
   language?: string;
@@ -121,6 +136,7 @@ export default function ProductsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
+        {/* TODO 2.1: Notice the Link component usage */}
         <Link href="/" className="text-blue-400 hover:text-blue-300">
           ← Back to Home
         </Link>
@@ -142,6 +158,7 @@ export default function ProductsPage() {
             <CodeBlock code={demo.codeExample} />
             
             <div className="mt-6">
+              {/* TODO 2.1: Notice another Link component usage */}
               <Link 
                 href={demo.linkUrl} 
                 className="text-blue-400 hover:text-blue-300"

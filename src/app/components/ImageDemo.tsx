@@ -1,8 +1,21 @@
+/*
+COMPONENT LEARNING OBJECTIVES:
+
+1. Type-safe props in Next.js components
+   - TODO 1.1: Notice the Photo interface for type safety
+5. Working with images in Next.js
+   - TODO 5.1: Learn to use the Next.js Image component
+   - TODO 5.2: Understand responsive images with sizes prop
+   - TODO 5.3: Use fill mode and object-fit
+   - TODO 5.4: Learn about priority loading for LCP images
+*/
+
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
+// TODO 1.1: Notice how we define interfaces for our data
 interface Photo {
   id: number;
   title: string;
@@ -54,11 +67,14 @@ export default function ImageDemo() {
               </div>
             ) : photos.length > 0 ? (
               <div className="relative h-64 w-full rounded-lg overflow-hidden">
+                {/* TODO 5.1: Notice the Image component usage */}
+                {/* TODO 5.3: Notice fill mode with object-cover */}
+                {/* TODO 5.4: Notice priority for LCP optimization */}
                 <Image
                   src={photos[0].url}
                   alt={photos[0].title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 50vw" // TODO 5.2: Notice responsive sizes
                   className="object-cover"
                   priority
                 />
@@ -94,6 +110,7 @@ export default function ImageDemo() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {photos.map((photo) => (
               <div key={photo.id} className="relative h-40 rounded-lg overflow-hidden">
+                {/* TODO 5.1, 5.2, 5.3: Notice multiple Image instances with optimization */}
                 <Image
                   src={photo.thumbnailUrl}
                   alt={photo.title}
