@@ -1,37 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 // TODO 1: Define a Todo interface
 // Create an interface that describes the shape of a todo item
 // It should have id, text, and completed properties
+interface Todo {
+  id: number | string;
+  text: string;
+  completed: boolean;
+  date?: number;
+}
 
-export default function TypeScriptBasicsPage() {
+export default function TypeScriptBasicsPage(): React.JSX.Element {
   // TODO 2: Add proper type to useState
   // Use the Todo interface you created and make an array of todos
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn Next.js", completed: false },
-    { id: 2, text: "Learn TypeScript", completed: false },
-    { id: 3, text: "Build a project", completed: false },
+  // kenapa tadi ga dikasih interface tidak error?
+
+  const [todos, setTodos] = useState<Todo[]>([
+    {
+      id: "1",
+      text: "Learn next with TS",
+      completed: false,
+    },
+    {
+      id: 2,
+      text: "Learn next with TS",
+      completed: false,
+    },
   ]);
 
   // TODO 3: Add proper type to useState for the input field
-  const [newTodoText, setNewTodoText] = useState("");
+  const [newTodoText, setNewTodoText] = useState<string>("");
 
   // TODO 4: Add proper type for the event parameter
   // Import the correct event type from React and add it here
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setNewTodoText(e.target.value);
   };
 
   // TODO 5: Add proper return type annotation to this function
-  const addTodo = () => {
+  const addTodo = (): void => {
     if (newTodoText.trim()) {
       // TODO 6: Add type annotation for the newTodo object
-      const newTodo = {
+      const newTodo: Todo = {
         id: Date.now(),
         text: newTodoText,
         completed: false,
+        date: Date.now(),
       };
       setTodos([...todos, newTodo]);
       setNewTodoText("");
@@ -39,13 +55,16 @@ export default function TypeScriptBasicsPage() {
   };
 
   // TODO 7: Add parameter type and return type annotations
-  const toggleTodo = (id: any) => {
+  const toggleTodo = (id: number | string): void => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
+
+  const hobbies: (string | number)[] = ["Reading", "Coding", 0];
+  const scores: (string | number)[] = [95, 87, 92, "1"];
 
   return (
     <main className="min-h-screen bg-gray-900 text-gray-200 p-6">
@@ -118,9 +137,9 @@ export default function TypeScriptBasicsPage() {
               <h3 className="text-white text-sm font-medium mb-1">Arrays:</h3>
               <div className="bg-gray-900 p-2 rounded">
                 <code className="text-blue-400">
-                  const hobbies: string[] = ['Reading', 'Coding'];
+                  const hobbies: string[] = ['Reading', 'Coding', 0];
                   <br />
-                  const scores: number[] = [95, 87, 92];
+                  const scores: number[] = [95, 87, 92, "1"];
                 </code>
               </div>
             </div>
