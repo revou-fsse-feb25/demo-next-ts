@@ -16,6 +16,7 @@ import { useState } from "react";
 export default function AuthDemo() {
   // TODO 4.1: Notice how we use state to track authentication
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log("tes islogin", isLoggedIn);
 
   // TODO 1.1: Notice how we use TypeScript interface for structured data
   interface UserProfile {
@@ -51,28 +52,11 @@ export default function AuthDemo() {
       {/* TODO 4.2: Notice conditional rendering based on authentication state */}
       {isLoggedIn ? (
         <div className="bg-gray-700 p-4 rounded-lg">
-          <h3 className="text-xl font-semibold mb-2">User Profile</h3>
-          <ul className="text-gray-300">
-            <li>
-              <strong>Name:</strong> {user.name}
-            </li>
-            <li>
-              <strong>Email:</strong> {user.email}
-            </li>
-            <li>
-              <strong>Role:</strong> {user.role}
-            </li>
-          </ul>
-          <p className="mt-4 text-sm text-gray-400">
-            This content is only visible when logged in. In a real app, you
-            would use middleware and session management.
-          </p>
+          <h1>udah login</h1>
         </div>
       ) : (
         <div className="bg-gray-700 p-4 rounded-lg">
-          <p className="text-gray-300">
-            You need to log in to view the protected content.
-          </p>
+          <p className="text-gray-300">Blm login</p>
         </div>
       )}
     </section>

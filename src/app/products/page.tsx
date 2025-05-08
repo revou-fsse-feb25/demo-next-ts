@@ -37,7 +37,8 @@ const typescriptDemos: FeatureDemo[] = [
   {
     id: "type-safe-props",
     title: "Type-Safe Props",
-    description: "Components with strictly typed props ensure correct usage and prevent errors.",
+    description:
+      "Components with strictly typed props ensure correct usage and prevent errors.",
     codeExample: `interface ButtonProps {
   text: string;
   onClick: () => void;
@@ -59,7 +60,8 @@ export function Button({
   {
     id: "typed-routing",
     title: "Type-Safe Routing",
-    description: "Define and enforce type safety for route parameters in Next.js.",
+    description:
+      "Define and enforce type safety for route parameters in Next.js.",
     codeExample: `// TODO 3.1: Notice how route parameters are typed
 // Define parameter types
 interface PostParams {
@@ -81,7 +83,8 @@ export default function Post({
   {
     id: "image-optimization",
     title: "Image Optimization with TypeScript",
-    description: "Properly typed Image components with all required properties.",
+    description:
+      "Properly typed Image components with all required properties.",
     codeExample: `import Image from 'next/image';
 
 // Type-safe Image component usage
@@ -142,9 +145,11 @@ export default function ProductsPage() {
         </Link>
       </div>
 
-      <h1 className="text-3xl font-bold mb-8">TypeScript Features in Next.js</h1>
+      <h1 className="text-3xl font-bold mb-8">
+        TypeScript Features in Next.js
+      </h1>
       <p className="text-gray-300 mb-8 max-w-3xl">
-        This page demonstrates type-safety features in Next.js with TypeScript, 
+        This page demonstrates type-safety features in Next.js with TypeScript,
         showing practical examples of how TypeScript improves development
         experience and code quality.
       </p>
@@ -154,13 +159,13 @@ export default function ProductsPage() {
           <section key={demo.id} className="bg-gray-800 rounded-lg p-6">
             <h2 className="text-2xl font-bold mb-4">{demo.title}</h2>
             <p className="text-gray-300 mb-6">{demo.description}</p>
-            
+
             <CodeBlock code={demo.codeExample} />
-            
+
             <div className="mt-6">
               {/* TODO 2.1: Notice another Link component usage */}
-              <Link 
-                href={demo.linkUrl} 
+              <Link
+                href={demo.linkUrl}
                 className="text-blue-400 hover:text-blue-300"
               >
                 {demo.linkText} →
