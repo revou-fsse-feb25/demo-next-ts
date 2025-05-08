@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Todo App with TypeScript and React Hook Form
+
+A minimal Next.js demo application with TypeScript, App Router, React Hook Form, and CRUD operations using local JSON data.
+
+## Features
+
+- **TypeScript**: Type-safe development
+- **Next.js App Router**: Modern routing framework
+- **React Hook Form**: Form validation and handling
+- **CRUD Operations**: Create, Read, Update, Delete operations
+- **Local JSON Storage**: Todos stored in a local JSON file
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Start the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+/src
+  /app                      # Next.js App Router
+    /api                    # API Routes
+      /todos                # Todo API endpoints
+        /[id]               # Dynamic routes for specific todos
+          route.ts          # GET, PATCH, DELETE handlers
+        route.ts            # GET, POST handlers
+    /components             # React components
+      TodoForm.tsx          # Form for creating/editing todos
+      TodoItem.tsx          # Component for individual todo items
+      TodoList.tsx          # Main todo list component
+    page.tsx                # Home page component
+  /data                     # Data storage
+    todos.json              # Local JSON file for storing todos
+  /types                    # TypeScript types
+    index.ts                # Todo type definitions
+  /utils                    # Utility functions
+    todoUtils.ts            # CRUD operations for todos
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Implementation Steps
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Setup Next.js**: Create a new Next.js project with TypeScript and App Router
+2. **Define Types**: Create interfaces for Todo data and form inputs
+3. **Create Local JSON**: Set up a local JSON file for storing todos
+4. **Implement Utils**: Create utility functions for CRUD operations
+5. **API Routes**: Set up API endpoints for todos
+6. **React Components**: Build React components with React Hook Form
+7. **Styling**: Apply minimal CSS for a clean UI
 
-## Deploy on Vercel
+## How It Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Creating Todos**: Enter a title in the form and click "Add"
+- **Reading Todos**: Todos are displayed in a list
+- **Updating Todos**: Click "Edit" on a todo to modify it or check/uncheck to toggle completion
+- **Deleting Todos**: Click "Delete" on a todo to remove it
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+
+- Next.js
+- TypeScript
+- React Hook Form
+- Node.js File System API
