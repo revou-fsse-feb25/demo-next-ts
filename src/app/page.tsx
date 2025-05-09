@@ -19,7 +19,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'card' | 'list'>('card');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCat, setSelectedCat] = useState<Cat | undefined>(undefined);
+  const [selectedCat, setSelectedCat] = useState<Cat | null>(null);
 
   // TODO: Load cats on initial render
   useEffect(() => {
@@ -34,6 +34,15 @@ export default function Home() {
     // - Set loading state
     // - Handle errors
     // - Update cats state
+    try{
+      setIsLoading(true)
+      const data = await fetchCats()
+      setCats(data)
+    } catch(error){
+      setError("failed to load cat")
+    }finally{
+      setIsLoading(false)
+    }
   };
 
   /**
@@ -190,7 +199,7 @@ export default function Home() {
         )}
 
         {/* Modal for adding/editing cats */}
-        <Modal 
+        {/* <Modal 
           isOpen={isModalOpen} 
           onClose={handleCloseModal} 
           title={selectedCat ? 'Edit Cat' : 'Add New Cat'}
@@ -200,7 +209,7 @@ export default function Home() {
             onSubmit={handleFormSubmit}
             onCancel={handleCloseModal}
           />
-        </Modal>
+        </Modal> */}
       </div>
     </main>
   );

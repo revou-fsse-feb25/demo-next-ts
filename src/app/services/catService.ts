@@ -18,7 +18,14 @@ const api = axios.create({
  */
 export const fetchCats = async (): Promise<Cat[]> => {
   // TODO: Implement fetching all cats
-  return [];
+  try{
+    const response = await axios.get(API_URL)
+    return response.data
+  } catch (error){
+    console.log(error)
+    throw new Error('failed to fetch data')
+  }
+  // return [];
 };
 
 /**
