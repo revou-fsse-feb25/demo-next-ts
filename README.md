@@ -53,7 +53,7 @@ Create a service layer using Axios to handle API calls:
 - Set up a base API client
 - Create functions for fetching, creating, updating, and deleting cats
 - Add proper error handling for API requests
-
+  
 ## Mini-Exercise
 
 ### Implement Modal for Adding and Editing Cats
