@@ -31,22 +31,7 @@ The application uses the following API endpoints:
 
 Follow these steps to implement the Cat Rental App:
 
-### 1. Set Up Components
-
-Create these essential components in your project:
-- **Modal**: A reusable overlay component for forms and dialogs
-- **CatForm**: Form component for adding/editing cats
-- **CatCard**: Card component for displaying cats in grid view
-- **CatRow**: Row component for displaying cats in table view
-
-### 2. Implement API Service
-
-Create a service layer using Axios to handle API calls:
-- Set up a base API client
-- Create functions for fetching, creating, updating, and deleting cats
-- Add proper error handling for API requests
-
-### 3. Build Main Page
+### 1. Build Main Page
 
 Implement the main page with:
 - State management for cats, loading states, errors, etc.
@@ -54,14 +39,21 @@ Implement the main page with:
 - Integration with the API service
 - Modal handling for adding/editing cats
 
-### 4. Style the Application
+### 2. Set Up Components
 
-Apply consistent styling with Tailwind CSS:
-- Design a responsive layout that works on all devices
-- Create a cohesive dark mode color theme
-- Add interactive elements like hover effects and animations
-- Ensure consistent spacing and typography
+Create these essential components in your project:
+- **Modal**: A reusable overlay component for forms and dialogs
+- **CatForm**: Form component for adding/editing cats
+- **CatCard**: Card component for displaying cats in grid view
+- **CatRow**: Row component for displaying cats in table view
 
+### 3. Implement API Service
+
+Create a service layer using Axios to handle API calls:
+- Set up a base API client
+- Create functions for fetching, creating, updating, and deleting cats
+- Add proper error handling for API requests
+  
 ## Mini-Exercise
 
 ### Implement Modal for Adding and Editing Cats
