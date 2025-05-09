@@ -42,6 +42,7 @@
 
 // TODO: 1.1 Import the TodoList component
 import TodoList from './components/TodoList';
+import FormReactHook from './components/FormReactHook';
 
 export default function Home() {
   // TODO: 2.1 Render the TodoList component with dark mode
@@ -49,6 +50,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 py-8">
       <div className="container mx-auto px-4">
         <TodoList />
+        {/* <FormReactHook /> */}
       </div>
     </div>
   );

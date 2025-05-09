@@ -13,6 +13,9 @@ const API_URL = 'https://64ca45bd700d50e3c7049e2f.mockapi.io/todo';
 
 // Get all todos
 export const fetchTodos = async (): Promise<Todo[]> => {
+  // const response await axios.get(API_URL)
+  // return response.data
+
   const response = await fetch(API_URL);
   
   if (!response.ok) {
@@ -35,6 +38,7 @@ export const fetchTodo = async (id: string): Promise<Todo> => {
 
 // Create a new todo
 export const createTodo = async (data: TodoFormInput): Promise<Todo> => {
+  // const response = await axios.post(API_URL, {
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: {

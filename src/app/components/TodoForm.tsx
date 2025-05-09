@@ -56,7 +56,7 @@ export default function TodoForm({ onSubmit, initialData }: TodoFormProps) {
         <div className="flex gap-2">
           <input
             type="text"
-            {...register('title', { required: 'Title is required' })}
+            {...register('title', { required: 'Title is required bangg' })}
             placeholder="Add a new task..."
             className="flex-1 px-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white placeholder-gray-400"
           />

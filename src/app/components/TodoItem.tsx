@@ -42,6 +42,7 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoIte
   // Implement function to handle todo deletion
   const handleDelete = async () => {
     try {
+      console.log('handle delete child', todo.id)
       setIsDeleting(true);
       await onDelete(todo.id);
     } catch (error) {

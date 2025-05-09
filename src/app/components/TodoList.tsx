@@ -15,29 +15,30 @@ import TodoForm from './TodoForm';
 import { fetchTodos, createTodo, updateTodo as apiUpdateTodo, deleteTodo as apiDeleteTodo } from '@/utils/api';
 
 export default function TodoList() {
-  // Set up state for todos
+  // state yang menampung semua data todos
   const [todos, setTodos] = useState<Todo[]>([]);
+  console.log('todos', todos)
   // Set up loading state
   const [isLoading, setIsLoading] = useState(true);
   // Set up error state
   const [error, setError] = useState<string | null>(null);
+
+  const loadTodos = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const data = await fetchTodos();
+      setTodos(data);
+    } catch (err) {
+      console.error('Error fetching todos:', err);
+      setError('Failed to load todos. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
   
   // Load todos from API when component mounts
   useEffect(() => {
-    const loadTodos = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const data = await fetchTodos();
-        setTodos(data);
-      } catch (err) {
-        console.error('Error fetching todos:', err);
-        setError('Failed to load todos. Please try again.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
     loadTodos();
   }, []);
   
@@ -88,6 +89,7 @@ export default function TodoList() {
   // Implement function to delete a todo
   const handleDeleteTodo = async (id: string) => {
     try {
+      console.log('handle delete parent', id)
       await apiDeleteTodo(id);
       setTodos(prev => prev.filter(todo => todo.id !== id));
       return Promise.resolve();
