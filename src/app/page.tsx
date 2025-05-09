@@ -21,7 +21,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCat, setSelectedCat] = useState<Cat | undefined>(undefined);
 
-  // Load cats on initial render
+  // TODO: Load cats on initial render
   useEffect(() => {
     loadCats();
   }, []);
@@ -30,92 +30,73 @@ export default function Home() {
    * Fetch cats from API
    */
   const loadCats = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const data = await fetchCats();
-      setCats(data);
-    } catch (err) {
-      setError('Failed to load cats. Please try again.');
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
+    // TODO: Implement loading cats from API
+    // - Set loading state
+    // - Handle errors
+    // - Update cats state
   };
 
   /**
    * Open modal to add a new cat
    */
   const handleAddCat = () => {
-    setSelectedCat(undefined);
-    setIsModalOpen(true);
+    // TODO: Implement adding a new cat
+    // - Reset selected cat
+    // - Open modal
   };
 
   /**
    * Open modal to edit an existing cat
    */
   const handleEditCat = (cat: Cat) => {
-    setSelectedCat(cat);
-    setIsModalOpen(true);
+    // TODO: Implement editing a cat
+    // - Set selected cat
+    // - Open modal
   };
 
   /**
    * Delete a cat after confirmation
    */
   const handleDeleteCat = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this cat?')) {
-      try {
-        await deleteCat(id);
-        setCats(prevCats => prevCats.filter(cat => cat.id !== id));
-      } catch (err) {
-        setError('Failed to delete cat. Please try again.');
-        console.error(err);
-      }
-    }
+    // TODO: Implement deleting a cat
+    // - Show confirmation dialog
+    // - Call API to delete
+    // - Update state
+    // - Handle errors
   };
 
   /**
    * Handle form submission for creating or updating cats
    */
   const handleFormSubmit = async (catData: CatFormData) => {
-    try {
-      if (selectedCat) {
-        // Update existing cat
-        const updatedCat = await updateCat(selectedCat.id, catData);
-        setCats(prevCats => 
-          prevCats.map(cat => cat.id === selectedCat.id ? updatedCat : cat)
-        );
-      } else {
-        // Create new cat
-        const newCat = await createCat(catData);
-        setCats(prevCats => [...prevCats, newCat]);
-      }
-      setIsModalOpen(false);
-    } catch (err) {
-      setError(`Failed to ${selectedCat ? 'update' : 'create'} cat. Please try again.`);
-      console.error(err);
-    }
+    // TODO: Implement form submission
+    // - Determine if creating or updating
+    // - Call appropriate API
+    // - Update state
+    // - Close modal
+    // - Handle errors
   };
 
   /**
    * Close the modal and reset selected cat
    */
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedCat(undefined);
+    // TODO: Implement closing modal
+    // - Close modal
+    // - Reset selected cat
   };
 
   return (
     <main className="min-h-screen bg-gray-950 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header section with title and action buttons */}
-        <header className="mb-8 bg-gray-900 p-5 rounded-lg shadow-lg">
+        <header className="mb-8 bg-gray-900 p-5 rounded-lg">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h1 className="text-3xl font-bold text-gradient">Cat Rental App</h1>
+            <h1 className="text-3xl font-bold">Cat Rental App</h1>
             <div className="flex flex-wrap gap-3 justify-center">
               {/* View toggle buttons */}
               <div className="flex items-center bg-gray-800 rounded-lg overflow-hidden">
-                <button
+              <button
                   onClick={() => setViewMode('card')}
                   className={`py-2 px-4 flex items-center ${viewMode === 'card' ? 'bg-accent text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'} transition-colors`}
                   aria-label="Switch to card view"
@@ -153,10 +134,7 @@ export default function Home() {
 
         {/* Error display */}
         {error && (
-          <div className="bg-red-500 bg-opacity-80 text-white p-4 rounded-lg mb-6 shadow-lg flex items-center">
-            <svg className="w-6 h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div className="bg-red-500 text-white p-4 rounded-lg mb-6">
             <span>{error}</span>
           </div>
         )}
@@ -164,26 +142,12 @@ export default function Home() {
         {/* Loading state */}
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="relative">
-              <div className="h-16 w-16 rounded-full border-4 border-gray-300 border-t-primary-500 animate-spin"></div>
-              <span className="sr-only">Loading...</span>
-            </div>
+            <div>Loading...</div>
           </div>
         ) : cats.length === 0 ? (
           <div className="text-center py-16 bg-gray-900 rounded-lg">
-            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 19c0-.3.3-2.3.9-3.2 1.4-2 3.5-3.5 6.1-3.5s4.7 1.5 6.1 3.5c.6 1 .9 2.9.9 3.2" />
-              <circle cx="12" cy="6.5" r="3.5" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} />
-            </svg>
             <p className="mt-4 text-xl font-medium">No cats available for rent.</p>
-            <p className="mt-2 text-gray-400">Start by adding your first cat for rent.</p>
-            <button
-              onClick={handleAddCat}
-              className="mt-6 bg-primary-600 hover:bg-primary-700 text-white py-2 px-6 rounded-lg flex items-center mx-auto transition-colors"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
+            <button onClick={handleAddCat}>
               Add Your First Cat
             </button>
           </div>
@@ -199,16 +163,16 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="overflow-x-auto bg-gray-900 rounded-lg shadow-lg">
+          <div className="overflow-x-auto bg-gray-900 rounded-lg">
             <table className="min-w-full">
               <thead>
                 <tr className="bg-gray-800 text-left">
-                  <th className="py-3 px-4 font-semibold">Name</th>
-                  <th className="py-3 px-4 font-semibold">Breed</th>
-                  <th className="py-3 px-4 font-semibold">Age</th>
-                  <th className="py-3 px-4 font-semibold">Description</th>
-                  <th className="py-3 px-4 font-semibold">Price</th>
-                  <th className="py-3 px-4 font-semibold">Actions</th>
+                  <th className="py-3 px-4">Name</th>
+                  <th className="py-3 px-4">Breed</th>
+                  <th className="py-3 px-4">Age</th>
+                  <th className="py-3 px-4">Description</th>
+                  <th className="py-3 px-4">Price</th>
+                  <th className="py-3 px-4">Actions</th>
                 </tr>
               </thead>
               <tbody>

@@ -17,13 +17,8 @@ const api = axios.create({
  * @returns Promise with an array of cats
  */
 export const fetchCats = async (): Promise<Cat[]> => {
-  try {
-    const response = await api.get('');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching cats:', error);
-    throw new Error('Failed to fetch cats');
-  }
+  // TODO: Implement fetching all cats
+  return [];
 };
 
 /**
@@ -32,13 +27,8 @@ export const fetchCats = async (): Promise<Cat[]> => {
  * @returns Promise with cat data
  */
 export const fetchCatById = async (id: string): Promise<Cat> => {
-  try {
-    const response = await api.get(`/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching cat ${id}:`, error);
-    throw new Error('Failed to fetch cat');
-  }
+  // TODO: Implement fetching a cat by ID
+  throw new Error('Not implemented');
 };
 
 /**
@@ -47,13 +37,8 @@ export const fetchCatById = async (id: string): Promise<Cat> => {
  * @returns Promise with the newly created cat
  */
 export const createCat = async (catData: CatFormData): Promise<Cat> => {
-  try {
-    const response = await api.post('', catData);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating cat:', error);
-    throw new Error('Failed to create cat');
-  }
+  // TODO: Implement creating a new cat
+  throw new Error('Not implemented');
 };
 
 /**
@@ -63,13 +48,8 @@ export const createCat = async (catData: CatFormData): Promise<Cat> => {
  * @returns Promise with the updated cat
  */
 export const updateCat = async (id: string, catData: Partial<CatFormData>): Promise<Cat> => {
-  try {
-    const response = await api.put(`/${id}`, catData);
-    return response.data;
-  } catch (error) {
-    console.error(`Error updating cat ${id}:`, error);
-    throw new Error('Failed to update cat');
-  }
+  // TODO: Implement updating a cat
+  throw new Error('Not implemented');
 };
 
 /**
@@ -77,10 +57,5 @@ export const updateCat = async (id: string, catData: Partial<CatFormData>): Prom
  * @param id - The cat's unique identifier
  */
 export const deleteCat = async (id: string): Promise<void> => {
-  try {
-    await api.delete(`/${id}`);
-  } catch (error) {
-    console.error(`Error deleting cat ${id}:`, error);
-    throw new Error('Failed to delete cat');
-  }
+  // TODO: Implement deleting a cat
 }; 
