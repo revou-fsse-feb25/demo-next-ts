@@ -6,6 +6,11 @@ interface DemoPerformanceProps {
 }
 
 const DemoPerformance: React.FC<DemoPerformanceProps> = ({ todos }) => {
+  // TODO: Performance Optimization Demo
+  // 1. Implement optimized rendering for the todo list
+  // 2. Add pagination or virtualization for large datasets
+  // 3. Demonstrate proper component boundaries
+  
   return (
     <div>
       <p className="text-gray-300 mb-4">Optimizing performance in server rendering.</p>
@@ -21,11 +26,10 @@ const DemoPerformance: React.FC<DemoPerformanceProps> = ({ todos }) => {
         </ul>
       </div>
       
-      <div className="text-sm text-gray-400">
-        <p>
-          This demo has loaded {todos.length} todos efficiently using server-side
-          rendering and proper component structure.
-        </p>
+      <div className="bg-gray-700 p-4 rounded-md">
+        <p className="text-yellow-400">⚠️ TODO: Implement performance optimizations</p>
+        <p className="text-gray-400 text-sm">Demonstrate efficient rendering of {todos.length} todos</p>
+        <p className="text-gray-400 text-sm">Consider adding pagination or virtualization</p>
       </div>
     </div>
   );

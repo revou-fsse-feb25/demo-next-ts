@@ -4,12 +4,11 @@ import TodoItem from './Todo';
 import PostItem from './Post';
 
 const DemoParallelFetch = async () => {
-  // Fetch multiple resources in parallel
-  const [todos, posts, user] = await Promise.all([
-    fetchTodos(),
-    fetchPosts(),
-    fetchUser(1)
-  ]);
+  // TODO: Parallel Data Fetching Demo
+  // 1. Use Promise.all to fetch multiple data sources simultaneously
+  // 2. Fetch todos, posts, and user data in parallel
+  // 3. Display the results in a grid layout
+  // Example: const [todos, posts, user] = await Promise.all([...])
   
   return (
     <div>
@@ -18,27 +17,20 @@ const DemoParallelFetch = async () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-gray-700 p-4 rounded-md">
           <h3 className="text-lg font-medium text-blue-200 mb-3">User</h3>
-          <p className="text-white text-lg">{user.name}</p>
-          <p className="text-gray-300">@{user.username}</p>
-          <p className="text-gray-300">{user.email}</p>
+          <p className="text-yellow-400">⚠️ TODO: Display user data</p>
+          <p className="text-gray-400 text-sm">Fetch and show user information</p>
         </div>
         
         <div className="bg-gray-700 p-4 rounded-md">
           <h3 className="text-lg font-medium text-blue-200 mb-3">Todos</h3>
-          <div className="max-h-60 overflow-y-auto">
-            {todos.slice(0, 3).map(todo => (
-              <TodoItem key={todo.id} todo={todo} />
-            ))}
-          </div>
+          <p className="text-yellow-400">⚠️ TODO: Display todo list</p>
+          <p className="text-gray-400 text-sm">Fetch and show todos using TodoItem component</p>
         </div>
         
         <div className="bg-gray-700 p-4 rounded-md">
           <h3 className="text-lg font-medium text-blue-200 mb-3">Posts</h3>
-          <div className="max-h-60 overflow-y-auto">
-            {posts.slice(0, 1).map(post => (
-              <PostItem key={post.id} post={post} />
-            ))}
-          </div>
+          <p className="text-yellow-400">⚠️ TODO: Display posts</p>
+          <p className="text-gray-400 text-sm">Fetch and show posts using PostItem component</p>
         </div>
       </div>
     </div>

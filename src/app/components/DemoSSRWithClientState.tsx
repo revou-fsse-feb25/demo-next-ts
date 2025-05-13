@@ -9,30 +9,27 @@ interface DemoSSRWithClientStateProps {
 
 // Example of combining SSR data with additional server data
 const DemoSSRWithClientState = async ({ initialTodos }: DemoSSRWithClientStateProps) => {
-  // Fetch posts on the server
-  const posts = await fetchPosts();
+  // TODO: SSR with Client State Demo
+  // 1. Fetch additional data on the server (posts)
+  // 2. Combine with the initialTodos that were passed as props
+  // 3. Display both sets of data
   
   return (
     <div>
       <p className="text-gray-300 mb-4">Server data combined with client-side state.</p>
       
-      <div className="mb-4">
-        {posts.length > 0 ? (
-          <PostItem key={posts[0].id} post={posts[0]} />
-        ) : (
-          <p>No posts found</p>
-        )}
+      <div className="bg-gray-700 p-4 rounded-md mb-4">
+        <h3 className="text-lg text-blue-200 mb-2">Posts from Server:</h3>
+        <p className="text-yellow-400">⚠️ TODO: Fetch and display posts</p>
+        <p className="text-gray-400 text-sm">Use the PostItem component to show posts</p>
       </div>
       
-      <div className="mt-4">
+      <div className="bg-gray-700 p-4 rounded-md mt-4">
         <h3 className="text-lg text-blue-200 mb-2">Initial Todos:</h3>
-        <div className="max-h-40 overflow-y-auto">
-          {initialTodos.slice(0, 2).map(todo => (
-            <TodoItem key={todo.id} todo={todo} />
-          ))}
-        </div>
-        <p className="text-xs text-gray-400 mt-2">
-          These todos were passed from server-side props
+        <p className="text-yellow-400">⚠️ TODO: Display initial todos</p>
+        <p className="text-gray-400 text-sm">Use the TodoItem component to display initialTodos</p>
+        <p className="text-gray-400 text-sm mt-2">
+          Available todos: {initialTodos.length}
         </p>
       </div>
     </div>

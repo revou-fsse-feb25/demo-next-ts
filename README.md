@@ -1,10 +1,10 @@
-# Next.js Data Fetching Patterns
+# Next.js Data Fetching Patterns - Starter Templates
 
 A simple demonstration of data fetching strategies in Next.js with TypeScript and Tailwind CSS.
 
 ## Overview
 
-This demo showcases different strategies for fetching data in Next.js applications. Each pattern is implemented as a separate component with a clear naming convention (Demo + Pattern) to make it easy to understand and learn from.
+This demo showcases different strategies for fetching data in Next.js applications. Each pattern is implemented as a starter template with TODO comments that guide you through implementing the functionality during a live demo or learning session.
 
 ## Features
 
@@ -19,6 +19,19 @@ This demo covers:
 7. **Caching and Revalidation** - Demonstrating SWR&apos;s caching capabilities
 8. **Performance Considerations** - Tips for optimizing server-rendered applications
 9. **Parallel Data Fetching** - Fetching multiple resources simultaneously
+
+## How to Use the Starter Templates
+
+Each component contains TODO comments that explain:
+- What to implement
+- How to implement it
+- Best practices for that specific pattern
+
+To use these templates during a demo:
+1. Start with the existing structure
+2. Follow the TODO comments in each component
+3. Implement the functionality during your demo
+4. Show the before and after for each pattern
 
 ## Technologies Used
 

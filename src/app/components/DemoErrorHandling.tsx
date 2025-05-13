@@ -7,35 +7,26 @@ import ErrorDisplay from './ErrorDisplay';
 import { fetchWithErrorDemo } from '../services/api';
 
 const DemoErrorHandling: React.FC = () => {
-  // This component uses SWR with built-in error handling and retry
-  const { data, error, isLoading, mutate } = useSWR('/api/error-prone', () => {
-    return fetchWithErrorDemo();
-  }, {
-    // Retry configuration
-    onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-      // Only retry up to 3 times
-      if (retryCount >= 3) return;
-      
-      // Retry after 2 seconds
-      setTimeout(() => revalidate({ retryCount }), 2000);
-    },
-  });
-  
-  if (isLoading) return <LoadingState message="Making error-prone request..." />;
-  if (error) return <ErrorDisplay error={error} onRetry={() => mutate()} />;
+  // TODO: Error Handling and Retry Demo
+  // 1. Use SWR to fetch data from an error-prone API endpoint
+  // 2. Configure error retry strategy with onErrorRetry
+  // 3. Implement proper error and loading states
+  // 4. Use mutate() to allow manual retries
   
   return (
     <div>
       <p className="text-gray-300 mb-4">Handling errors with retry functionality.</p>
       
-      <div className="bg-green-900 p-4 rounded-md">
-        <p className="text-green-200">✓ {data?.message}</p>
-        <p className="text-green-300 text-xs mt-2">This request succeeded, but has a 50% chance of failure.</p>
+      <div className="bg-gray-700 p-4 rounded-md">
+        <p className="text-yellow-400">⚠️ TODO: Implement error handling and retry logic</p>
+        <p className="text-gray-400 text-sm">Use the ErrorDisplay component with a retry button</p>
+        <p className="text-gray-400 text-sm mt-2">Note: The API has a 50% chance of failing for demo purposes</p>
+        
         <button
-          onClick={() => mutate()}
-          className="mt-3 px-4 py-1 bg-green-800 hover:bg-green-700 rounded-md text-white"
+          onClick={() => {/* TODO: Add retry functionality */}}
+          className="mt-3 px-4 py-1 bg-blue-600 hover:bg-blue-500 rounded-md"
         >
-          Try Again
+          Try Request
         </button>
       </div>
     </div>

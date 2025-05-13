@@ -13,40 +13,20 @@ interface CacheData {
 const DemoCaching: React.FC = () => {
   const [count, setCount] = useState(0);
   
-  // Demonstrate SWR&apos;s caching with a memoized key
-  const { data, isLoading } = useSWR<CacheData>(
-    ['cached-data', count], 
-    ([_, countValue]: [string, number]) => {
-      // This function will return different results based on the count
-      return new Promise<CacheData>(resolve => {
-        setTimeout(() => {
-          resolve({
-            timestamp: new Date().toISOString(),
-            count: countValue,
-            message: `This data is cached by SWR (count: ${countValue})`
-          });
-        }, 1000);
-      });
-    },
-    {
-      // Keep cached data for 10 seconds
-      dedupingInterval: 10000,
-    }
-  );
+  // TODO: Caching and Revalidation Demo
+  // 1. Use SWR with a caching strategy
+  // 2. Set up a dedupingInterval to cache data for a specific time
+  // 3. Demonstrate how changing the key (count) affects cache behavior
+  // Example: const { data, isLoading } = useSWR<CacheData>(['cached-data', count], ...)
   
   return (
     <div>
       <p className="text-gray-300 mb-4">Demonstrating SWR&apos;s caching and revalidation.</p>
       
       <div className="bg-gray-700 p-4 rounded-md mb-4">
-        {isLoading ? (
-          <LoadingState message="Loading cached data..." />
-        ) : (
-          <>
-            <p className="text-gray-300 mb-2">{data?.message}</p>
-            <p className="text-xs text-gray-400">Fetched at: {data?.timestamp}</p>
-          </>
-        )}
+        <p className="text-yellow-400">⚠️ TODO: Implement caching demonstration here</p>
+        <p className="text-gray-400 text-sm">This should show cached data that updates when count changes</p>
+        <p className="text-gray-400 text-sm">Current count: {count}</p>
       </div>
       
       <div className="flex space-x-2">
