@@ -32,16 +32,15 @@ export interface Comment {
 }
 
 // Utility function to simulate network delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Base JSONPlaceholder API URL
-const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
+const API_BASE_URL = "https://jsonplaceholder.typicode.com";
 
 // Fetch todos
 export async function fetchTodos(): Promise<Todo[]> {
-  await delay(800); // Simulate network delay
   const response = await fetch(`${API_BASE_URL}/todos?_limit=5`);
-  if (!response.ok) throw new Error('Failed to fetch todos');
+  if (!response.ok) throw new Error("Failed to fetch todos");
   return response.json();
 }
 
@@ -57,7 +56,7 @@ export async function fetchTodo(id: number): Promise<Todo> {
 export async function fetchPosts(): Promise<Post[]> {
   await delay(1000);
   const response = await fetch(`${API_BASE_URL}/posts?_limit=5`);
-  if (!response.ok) throw new Error('Failed to fetch posts');
+  if (!response.ok) throw new Error("Failed to fetch posts");
   return response.json();
 }
 
@@ -81,7 +80,8 @@ export async function fetchUser(id: number): Promise<User> {
 export async function fetchComments(postId: number): Promise<Comment[]> {
   await delay(900);
   const response = await fetch(`${API_BASE_URL}/comments?postId=${postId}`);
-  if (!response.ok) throw new Error(`Failed to fetch comments for post ${postId}`);
+  if (!response.ok)
+    throw new Error(`Failed to fetch comments for post ${postId}`);
   return response.json();
 }
 
@@ -90,7 +90,7 @@ export async function fetchWithErrorDemo(): Promise<{ message: string }> {
   await delay(500);
   // 50% chance of failure for demo purposes
   if (Math.random() < 0.5) {
-    throw new Error('Demo API error (50% chance of failure)');
+    throw new Error("Demo API error (50% chance of failure)");
   }
-  return { message: 'Request succeeded!' };
-} 
+  return { message: "Request succeeded!" };
+}
