@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import DynamicSSR from '../../components/DynamicSSR';
+// TODO: Import DynamicSSR component
 
 export default function Page(props: any) {
-  const id = props.params?.id;
-  const userId = parseInt(id, 10);
+  // TODO: Extract and parse the id parameter from props.params
+  // Example: const userId = parseInt(props.params?.id, 10);
+  const userId = 1; // This is a placeholder
   
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -28,8 +29,11 @@ export default function Page(props: any) {
 
       <main className="max-w-4xl mx-auto space-y-8">
         <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
-          <h2 className="text-xl font-medium mb-4 text-indigo-300">User Data (SSR with params.id: {id})</h2>
-          <DynamicSSR userId={userId} />
+          <h2 className="text-xl font-medium mb-4 text-indigo-300">User Data (SSR with Dynamic Route)</h2>
+          
+          <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+            TODO: Implement the DynamicSSR component with the user ID from URL params
+          </div>
         </div>
         
         <div className="p-4 bg-indigo-900/50 rounded border border-indigo-800">

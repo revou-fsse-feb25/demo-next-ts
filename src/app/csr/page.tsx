@@ -1,8 +1,13 @@
 import React from 'react';
-import CSRWithSWR from '../components/CSRWithSWR';
 import Link from 'next/link';
 
 export default function CSRPage() {
+  // TODO: Implement client-side rendering with SWR
+  // 1. Create a client component with the 'use client' directive
+  // 2. Use the SWR hook to fetch data from JSONPlaceholder API
+  // 3. Add loading and error states
+  // 4. Implement UI to display the fetched data
+  
   return (
     <div className="min-h-screen bg-gray-900 p-6">
       <header className="mb-8">
@@ -12,7 +17,9 @@ export default function CSRPage() {
       </header>
 
       <main className="max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
-        <CSRWithSWR initialPostId={1} />
+        <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+          TODO: Implement the CSRWithSWR component here
+        </div>
         
         <div className="mt-8 p-4 bg-blue-900/50 rounded border border-blue-800">
           <h3 className="font-medium text-blue-300 mb-2">About Client-Side Rendering</h3>

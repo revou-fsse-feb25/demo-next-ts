@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import { fetchPosts } from '../services/api';
-import SSGPage from '../components/SSGPage';
+// TODO: Import fetchPosts from '../services/api'
+// TODO: Import SSGPage component
 
 // This enables Static Site Generation
 export const dynamic = 'force-static';
 
 export default async function StaticSiteGenerationPage() {
-  // This data will be fetched at build time
-  const posts = await fetchPosts();
+  // TODO: Fetch data at build time
+  // Example: const posts = await fetchPosts();
   
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -21,7 +21,10 @@ export default async function StaticSiteGenerationPage() {
       <main className="max-w-4xl mx-auto space-y-8">
         <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
           <h2 className="text-xl font-medium mb-4 text-green-300">Static Generated Data</h2>
-          <SSGPage posts={posts} />
+          
+          <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+            TODO: Implement the SSGPage component with posts data
+          </div>
         </div>
         
         <div className="p-4 bg-green-900/50 rounded border border-green-800">

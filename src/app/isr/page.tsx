@@ -1,17 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import { fetchTodos } from '../services/api';
-import ISRPage from '../components/ISRPage';
+// TODO: Import fetchTodos from '../services/api'
+// TODO: Import ISRPage component
 
 // Set revalidation time for ISR
 export const revalidate = 60; // revalidate this page every 60 seconds
 
 export default async function IncrementalStaticRegenerationPage() {
-  // Fetch data just like in SSR/SSG
-  const todos = await fetchTodos();
+  // TODO: Fetch data that will be revalidated
+  // Example: const todos = await fetchTodos();
   
-  // Format current time to show when the page was last regenerated
-  const lastUpdated = new Date().toLocaleString();
+  // TODO: Generate current time to show when the page was last regenerated
+  // Example: const lastUpdated = new Date().toLocaleString();
   
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -35,7 +35,10 @@ export default async function IncrementalStaticRegenerationPage() {
       <main className="max-w-4xl mx-auto space-y-8">
         <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
           <h2 className="text-xl font-medium mb-4 text-amber-300">ISR Data (Revalidated every 60s)</h2>
-          <ISRPage todos={todos} lastUpdated={lastUpdated} />
+          
+          <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+            TODO: Implement the ISRPage component with todos data and lastUpdated time
+          </div>
         </div>
         
         <div className="p-4 bg-amber-900/50 rounded border border-amber-800">

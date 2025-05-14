@@ -1,12 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { fetchTodos } from '../services/api';
-import SSRPage from '../components/SSRPage';
-import DynamicSSR from '../components/DynamicSSR';
+// TODO: Import fetchTodos from '../services/api'
+// TODO: Import SSRPage and DynamicSSR components
 
 export default async function ServerSideRenderingPage() {
-  // Fetch todos for SSR demo
-  const todos = await fetchTodos();
+  // TODO: Fetch todos data on the server
+  // Example: const todos = await fetchTodos();
   
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -30,12 +29,16 @@ export default async function ServerSideRenderingPage() {
       <main className="max-w-4xl mx-auto space-y-8">
         <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
           <h2 className="text-xl font-medium mb-4 text-indigo-300">SSR with All Data</h2>
-          <SSRPage todos={todos} />
+          <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+            TODO: Implement the SSRPage component with todos data
+          </div>
         </div>
 
         <div className="bg-gray-800 p-6 rounded-lg shadow border border-gray-700">
           <h2 className="text-xl font-medium mb-4 text-indigo-300">SSR with Dynamic Data (ID-based)</h2>
-          <DynamicSSR userId={1} />
+          <div className="p-4 bg-yellow-900/50 rounded border border-yellow-800 text-yellow-200 font-medium">
+            TODO: Implement the DynamicSSR component with userId=1
+          </div>
         </div>
         
         <div className="p-4 bg-indigo-900/50 rounded border border-indigo-800">
