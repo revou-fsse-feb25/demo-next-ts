@@ -12,10 +12,8 @@ interface MoviePageProps {
 
 // Generate metadata for the movie page (for SEO)
 export async function generateMetadata({ params }: MoviePageProps) {
-  const { id } = params;
-  
   try {
-    const movie = await getMovie(id);
+    const movie = await getMovie(params.id);
     
     return {
       title: `${movie.title} - MovieHub`,
@@ -36,12 +34,10 @@ export async function generateMetadata({ params }: MoviePageProps) {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-  const { id } = params;
-  
   try {
     // Data fetching happens on the server
-    const movie = await getMovie(id);
-    const recommendations = await getMovieRecommendations(id);
+    const movie = await getMovie(params.id);
+    const recommendations = await getMovieRecommendations(params.id);
     
     const posterUrl = movie.isExternalImage ? movie.poster : `/images${movie.poster}`;
     const backdropUrl = movie.isExternalImage ? movie.backdrop : `/images${movie.backdrop}`;
@@ -49,13 +45,13 @@ export default async function MoviePage({ params }: MoviePageProps) {
     const year = new Date(movie.releaseDate).getFullYear();
     
     // Format the rating to show only one decimal place
-    const formattedRating = (movie.rating / 10).toFixed(1);
+    const formattedRating = movie.rating.toFixed(1);
     
     // Calculate rating color based on value
     const getRatingColor = (rating: number) => {
-      if (rating >= 7) return 'text-green-400';
-      if (rating >= 5) return 'text-amber-400';
-      return 'text-red-400';
+      if (rating >= 7) return 'text-green-500';
+      if (rating >= 5) return 'text-amber-500';
+      return 'text-red-500';
     };
     
     return (
@@ -155,7 +151,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
           </div>
         </div>
         
-        {recommendations.length > 0 && (
+        {recommendations.length > 0 ? (
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,7 +159,21 @@ export default async function MoviePage({ params }: MoviePageProps) {
               </svg>
               You Might Also Like
             </h2>
-            <MovieList movies={recommendations} />
+            <MovieList 
+              movies={recommendations} 
+              columns={{ sm: 1, md: 3, lg: 3 }} 
+              emptyMessage={`No recommendations found for ${movie.title}`}
+            />
+          </div>
+        ) : (
+          <div className="mt-16 bg-gray-800/50 rounded-lg p-8">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Recommendations
+            </h2>
+            <p className="text-gray-400">No similar movies found for {movie.title}.</p>
           </div>
         )}
         

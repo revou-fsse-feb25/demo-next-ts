@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Movie, getPopularMovies } from './services/movieService';
 import MovieList from './components/MovieList';
+import LoadingSpinner from './components/LoadingSpinner';
+import ErrorDisplay from './components/ErrorDisplay';
 
 export default function Home() {
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
@@ -57,29 +59,21 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-white mb-8">Popular Movies</h2>
         
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20">
-            <div className="w-16 h-16 border-4 border-gray-700 border-t-amber-500 rounded-full animate-spin mb-4"></div>
-            <p className="text-gray-400">Loading popular movies...</p>
-          </div>
+          <LoadingSpinner message="Loading popular movies..." />
         ) : error ? (
-          <div className="bg-red-900/30 border border-red-800 text-red-200 p-4 rounded-lg text-center">
-            <p>{error}</p>
-            <button 
-              onClick={() => {
-                setIsLoading(true);
-                getPopularMovies()
-                  .then(movies => {
-                    setPopularMovies(movies);
-                    setError(null);
-                  })
-                  .catch(() => setError('Failed to load movies. Please try again later.'))
-                  .finally(() => setIsLoading(false));
-              }}
-              className="mt-3 bg-red-800 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm"
-            >
-              Try Again
-            </button>
-          </div>
+          <ErrorDisplay 
+            message={error} 
+            onRetry={() => {
+              setIsLoading(true);
+              getPopularMovies()
+                .then(movies => {
+                  setPopularMovies(movies);
+                  setError(null);
+                })
+                .catch(() => setError('Failed to load movies. Please try again later.'))
+                .finally(() => setIsLoading(false));
+            }} 
+          />
         ) : (
           <MovieList movies={popularMovies} />
         )}
