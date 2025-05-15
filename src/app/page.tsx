@@ -1,52 +1,101 @@
-import React from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Movie, getPopularMovies } from './services/movieService';
+import MovieList from './components/MovieList';
 
 export default function Home() {
+  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadMovies() {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const movies = await getPopularMovies();
+        setPopularMovies(movies);
+      } catch (error) {
+        console.error('Failed to load movies:', error);
+        setError('Failed to load movies. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadMovies();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-900 p-6">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-white">Next.js Data Fetching Patterns</h1>
-        <p className="text-gray-300">Simple demonstrations of various data fetching strategies</p>
-      </header>
+    <div className="space-y-12">
+      <section className="text-center py-24 bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl shadow-lg">
+        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+          Welcome to <span className="text-amber-500">MovieHub</span>
+        </h1>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          Discover amazing movies and get personalized recommendations
+        </p>
+        <div className="mt-8 flex justify-center gap-4">
+          <Link 
+            href="/movies" 
+            className="bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-3 rounded-full font-semibold text-lg transition-colors shadow-lg hover:shadow-amber-500/20"
+          >
+            Browse All Movies
+          </Link>
+          <Link 
+            href="/guides" 
+            className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-full font-semibold text-lg transition-colors shadow-lg"
+          >
+            Watch Guides
+          </Link>
+        </div>
+      </section>
 
-      <main className="grid grid-cols-1 gap-6 md:grid-cols-2 max-w-6xl mx-auto">
-        {/* 1. Client-Side Rendering with SWR */}
-        <Link href="/csr" className="group">
-          <section className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-700">
-            <h2 className="text-xl font-semibold mb-2 text-blue-400 group-hover:text-blue-300">1. Client-Side Rendering (CSR)</h2>
-            <p className="text-gray-300">Using SWR for client-side data fetching with built-in caching and revalidation.</p>
-          </section>
-        </Link>
+      <section>
+        <h2 className="text-3xl font-bold text-white mb-8">Popular Movies</h2>
+        
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="w-16 h-16 border-4 border-gray-700 border-t-amber-500 rounded-full animate-spin mb-4"></div>
+            <p className="text-gray-400">Loading popular movies...</p>
+          </div>
+        ) : error ? (
+          <div className="bg-red-900/30 border border-red-800 text-red-200 p-4 rounded-lg text-center">
+            <p>{error}</p>
+            <button 
+              onClick={() => {
+                setIsLoading(true);
+                getPopularMovies()
+                  .then(movies => {
+                    setPopularMovies(movies);
+                    setError(null);
+                  })
+                  .catch(() => setError('Failed to load movies. Please try again later.'))
+                  .finally(() => setIsLoading(false));
+              }}
+              className="mt-3 bg-red-800 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <MovieList movies={popularMovies} />
+        )}
+      </section>
 
-        {/* 2. Server-Side Rendering */}
-        <Link href="/ssr" className="group">
-          <section className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-700">
-            <h2 className="text-xl font-semibold mb-2 text-indigo-400 group-hover:text-indigo-300">2. Server-Side Rendering (SSR)</h2>
-            <p className="text-gray-300">Data fetching happens on the server for each request, including dynamic routes with params.</p>
-          </section>
-        </Link>
-
-        {/* 3. Static Site Generation */}
-        <Link href="/ssg" className="group">
-          <section className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-700">
-            <h2 className="text-xl font-semibold mb-2 text-green-400 group-hover:text-green-300">3. Static Site Generation (SSG)</h2>
-            <p className="text-gray-300">Pre-render pages at build time for maximum performance.</p>
-          </section>
-        </Link>
-
-        {/* 4. Incremental Static Regeneration */}
-        <Link href="/isr" className="group">
-          <section className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-700">
-            <h2 className="text-xl font-semibold mb-2 text-amber-400 group-hover:text-amber-300">4. Incremental Static Regeneration (ISR)</h2>
-            <p className="text-gray-300">Static generation with data revalidation at specified intervals.</p>
-          </section>
-        </Link>
-      </main>
-
-      <footer className="mt-12 text-center text-gray-400 text-sm">
-        <p>Next.js Data Fetching Patterns - © {new Date().getFullYear()}</p>
-        <p>Using <a href="https://jsonplaceholder.typicode.com/" className="underline hover:text-gray-300">JSONPlaceholder</a></p>
-      </footer>
+      <section className="bg-gray-800 p-8 rounded-xl shadow-md">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-4 text-center">About Client-Side Rendering</h2>
+          <p className="text-gray-300 leading-relaxed">
+            This homepage uses client-side rendering (CSR) to fetch movie data after the page loads.
+            CSR is useful for dynamic content that doesn't need SEO and for interactive features.
+            Notice how the content loads after the initial page render, with a smooth loading animation
+            to enhance the user experience.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
