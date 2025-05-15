@@ -152,35 +152,36 @@ export default async function MoviePage({ params }: MoviePageProps) {
         </div>
         
         {recommendations.length > 0 ? (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="mt-12">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               You Might Also Like
             </h2>
             <MovieList 
               movies={recommendations} 
-              columns={{ sm: 1, md: 3, lg: 3 }} 
+              columns={{ sm: 2, md: 3, lg: 5, xl: 6 }} 
+              layout="grid"
               emptyMessage={`No recommendations found for ${movie.title}`}
             />
           </div>
         ) : (
-          <div className="mt-16 bg-gray-800/50 rounded-lg p-8">
-            <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="mt-12 bg-gray-800/50 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-white mb-3 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               Recommendations
             </h2>
-            <p className="text-gray-400">No similar movies found for {movie.title}.</p>
+            <p className="text-gray-400 text-sm">No similar movies found for {movie.title}.</p>
           </div>
         )}
         
-        <section className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-xl shadow-lg">
+        <section className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-xl shadow-lg">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">About SSR for Movie Details</h2>
-            <p className="text-gray-300 leading-relaxed">
+            <h2 className="text-xl font-bold text-white mb-3">About SSR for Movie Details</h2>
+            <p className="text-sm text-gray-300 leading-relaxed">
               This page uses server-side rendering for movie details, which is crucial for SEO.
               Search engines can easily index all the movie content, including title, overview, and metadata.
               Additionally, the page loads with all the content already rendered, providing a better user experience.

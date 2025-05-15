@@ -11,34 +11,40 @@ interface MovieListProps {
     lg?: number;
     xl?: number;
   };
+  layout?: 'grid' | 'horizontal';
 }
 
 export default function MovieList({ 
   movies, 
   title, 
   emptyMessage = "No movies found",
-  columns = { sm: 2, md: 3, lg: 4 }
+  columns = { sm: 2, md: 3, lg: 4, xl: 5 },
+  layout = 'grid'
 }: MovieListProps) {
   // Dynamic grid class based on provided columns
-  const gridClass = `grid grid-cols-1 ${columns.sm ? `sm:grid-cols-${columns.sm}` : ''} ${columns.md ? `md:grid-cols-${columns.md}` : ''} ${columns.lg ? `lg:grid-cols-${columns.lg}` : ''} ${columns.xl ? `xl:grid-cols-${columns.xl}` : ''} gap-6`;
+  const gridClass = `grid grid-cols-1 ${columns.sm ? `sm:grid-cols-${columns.sm}` : ''} ${columns.md ? `md:grid-cols-${columns.md}` : ''} ${columns.lg ? `lg:grid-cols-${columns.lg}` : ''} ${columns.xl ? `xl:grid-cols-${columns.xl}` : ''} gap-4`;
 
   return (
-    <section className="py-6">
+    <section className="py-4">
       {title && (
-        <h2 className="text-2xl font-bold text-white mb-6">{title}</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">{title}</h2>
       )}
       
       {movies.length > 0 ? (
         <div className={gridClass}>
           {movies.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard 
+              key={movie.id} 
+              movie={movie} 
+              horizontal={layout === 'horizontal'}
+            />
           ))}
         </div>
       ) : (
-        <div className="bg-gray-800 rounded-lg p-8 text-center">
+        <div className="bg-gray-800 rounded-lg p-6 text-center">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="h-16 w-16 mx-auto text-gray-600 mb-4" 
+            className="h-12 w-12 mx-auto text-gray-600 mb-3" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
