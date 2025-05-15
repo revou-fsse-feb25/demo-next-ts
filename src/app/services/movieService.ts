@@ -18,59 +18,25 @@ const API_URL = 'https://64ca45bd700d50e3c7049e2f.mockapi.io/film';
 // Simulate network delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-/**
- * Normalizes a rating value to a consistent 0-10 scale
- * Handles different input scales (0-1, 0-5, 0-10, 0-100)
- */
-const normalizeRating = (rating: any): number => {
-  // Handle non-numeric values
-  if (typeof rating !== 'number' || isNaN(rating) || rating === null) {
-    return 0;
-  }
-  
-  // Clamp negative values to 0
-  if (rating < 0) {
-    return 0;
-  }
-  
-  // Case 1: Rating is in 0-1 range (e.g., 0.85)
-  if (rating > 0 && rating <= 1) {
-    return rating * 10;
-  }
-  
-  // Case 2: Rating is in 0-5 range (e.g., 4.5)
-  if (rating > 1 && rating <= 5) {
-    return rating * 2;
-  }
-  
-  // Case 3: Rating is in 0-10 range (e.g., 7.8)
-  if (rating > 5 && rating <= 10) {
-    return rating;
-  }
-  
-  // Case 4: Rating is in 0-100 range (e.g., 78)
-  if (rating > 10 && rating <= 100) {
-    return rating / 10;
-  }
-  
-  // Case 5: Rating is > 100, cap at 10
-  if (rating > 100) {
-    return 10;
-  }
-  
-  // Fallback
-  return rating;
-};
-
 // Clean and format movie data
 const formatMovie = (movie: any): Movie => {
-  // Apply rating normalization and round to 1 decimal place
-  const normalizedRating = normalizeRating(movie.rating);
-  const roundedRating = parseFloat(normalizedRating.toFixed(1));
+  // Normalize rating to a scale of 0-10
+  let normalizedRating = movie.rating;
+  
+  // If rating is > 10, assume it's on a 0-100 scale and convert to 0-10
+  if (typeof normalizedRating === 'number' && normalizedRating > 10) {
+    normalizedRating = normalizedRating / 10;
+  }
+  
+  // If rating is < 1, might be on a 0-1 scale, multiply by 10
+  if (typeof normalizedRating === 'number' && normalizedRating > 0 && normalizedRating < 1) {
+    normalizedRating = normalizedRating * 10;
+  }
   
   return {
     ...movie,
-    rating: roundedRating,
+    // Ensure rating is always a number and correctly normalized
+    rating: typeof normalizedRating === 'number' ? parseFloat(normalizedRating.toFixed(1)) : 0,
     // Ensure genre is always an array
     genre: Array.isArray(movie.genre) ? movie.genre : [],
     // Mark all API images as external
@@ -114,7 +80,7 @@ export async function createMovie(movieData: Omit<Movie, 'id'>): Promise<Movie> 
     // Normalize rating before sending to API
     const normalizedData = {
       ...movieData,
-      rating: normalizeRating(movieData.rating)
+      rating: typeof movieData.rating === 'number' ? movieData.rating : 0
     };
     
     const response = await fetch(API_URL, {
@@ -140,14 +106,11 @@ export async function createMovie(movieData: Omit<Movie, 'id'>): Promise<Movie> 
 // Update an existing movie
 export async function updateMovie(id: string | number, movieData: Partial<Movie>): Promise<Movie> {
   try {
-    // Normalize rating before sending to API if it exists
+    // Normalize rating before sending to API
     const normalizedData = {
-      ...movieData
+      ...movieData,
+      rating: typeof movieData.rating === 'number' ? movieData.rating : 0
     };
-    
-    if ('rating' in movieData) {
-      normalizedData.rating = normalizeRating(movieData.rating);
-    }
     
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
