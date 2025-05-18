@@ -1,26 +1,29 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: 15 15 15; /* Dark background */
+  --foreground: 229 229 229; /* Light text */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --card-background: 39 39 42; /* Dark card background */
+  --card-foreground: 229 229 229; /* Light card text */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary: 59 130 246; /* Blue primary color */
+  --primary-foreground: 255 255 255;
+
+  --secondary: 30 41 59; /* Dark blue secondary */
+  --secondary-foreground: 229 229 229;
+
+  --accent: 124 58 237; /* Purple accent */
+  --accent-foreground: 255 255 255;
+
+  --error: 239 68 68; /* Red for errors */
+  --error-foreground: 255 255 255;
+
+  --success: 34 197 94; /* Green for success */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
 }
