@@ -14,45 +14,39 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setIsLoading(true);
-
+    // e.preventDefault();
+    // setError("");
+    // setIsLoading(true);
     // In a real app, you would register the user with an API
     // For this demo, we'll just simulate a successful registration
     // and then sign the user in
-
-    try {
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // In a real application, you would make an API call here
-      // const response = await fetch('/api/register', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ name, email, password }),
-      // });
-
-      // For demo purposes, we'll skip to the login step
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError("Registration failed. Please try again.");
-        setIsLoading(false);
-        return;
-      }
-
-      // Redirect to dashboard
-      router.push("/dashboard");
-    } catch (error) {
-      setError("An unexpected error occurred");
-      setIsLoading(false);
-      console.error("Registration error:", error);
-    }
+    // try {
+    // Simulate API call delay
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    // In a real application, you would make an API call here
+    // const response = await fetch('/api/register', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ name, email, password }),
+    // });
+    // For demo purposes, we'll skip to the login step
+    // const result = await signIn("credentials", {
+    //   email,
+    //   password,
+    //   redirect: false,
+    // });
+    // if (result?.error) {
+    //   setError("Registration failed. Please try again.");
+    //   setIsLoading(false);
+    //   return;
+    // }
+    // Redirect to dashboard
+    //   router.push("/dashboard");
+    // } catch (error) {
+    //   setError("An unexpected error occurred");
+    //   setIsLoading(false);
+    //   console.error("Registration error:", error);
+    // }
   };
 
   return (

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Home() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   return (
     <div className="min-h-screen bg-zinc-900">
@@ -25,7 +25,7 @@ export default function Home() {
             <h2 className="text-lg font-semibold mb-2 text-white">
               Authentication Status
             </h2>
-            {session ? (
+            {/* {session ? (
               <div className="bg-green-900/30 p-4 rounded-md border border-green-800">
                 <div className="flex items-center mb-1">
                   <svg
@@ -71,7 +71,7 @@ export default function Home() {
                   Protected routes will redirect you to the login page
                 </p>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">

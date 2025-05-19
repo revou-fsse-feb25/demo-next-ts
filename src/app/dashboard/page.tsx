@@ -9,47 +9,47 @@ export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    // If the user is not authenticated, redirect to login
-    // This is a client-side check in addition to middleware protection
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   // If the user is not authenticated, redirect to login
+  //   // This is a client-side check in addition to middleware protection
+  //   if (status === "unauthenticated") {
+  //     router.push("/login");
+  //   }
+  // }, [status, router]);
 
   // Show loading state while checking session
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900">
-        <div className="bg-zinc-800/70 backdrop-blur-sm rounded-2xl shadow-xl p-10 border border-zinc-700/50 text-center">
-          <div className="flex justify-center mb-4">
-            <div className="relative">
-              <div className="h-16 w-16 rounded-full border-t-2 border-b-2 border-blue-500 animate-spin"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <svg
-                  className="h-8 w-8 text-blue-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <h3 className="text-xl text-white font-medium mb-1">
-            Authenticating
-          </h3>
-          <p className="text-zinc-400">Verifying your session...</p>
-        </div>
-      </div>
-    );
-  }
+  // if (status === "loading") {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900">
+  //       <div className="bg-zinc-800/70 backdrop-blur-sm rounded-2xl shadow-xl p-10 border border-zinc-700/50 text-center">
+  //         <div className="flex justify-center mb-4">
+  //           <div className="relative">
+  //             <div className="h-16 w-16 rounded-full border-t-2 border-b-2 border-blue-500 animate-spin"></div>
+  //             <div className="absolute inset-0 flex items-center justify-center">
+  //               <svg
+  //                 className="h-8 w-8 text-blue-500"
+  //                 fill="none"
+  //                 viewBox="0 0 24 24"
+  //               >
+  //                 <path
+  //                   stroke="currentColor"
+  //                   strokeLinecap="round"
+  //                   strokeLinejoin="round"
+  //                   strokeWidth="2"
+  //                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+  //                 />
+  //               </svg>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         <h3 className="text-xl text-white font-medium mb-1">
+  //           Authenticating
+  //         </h3>
+  //         <p className="text-zinc-400">Verifying your session...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   // Only render dashboard content for authenticated users
   return (
@@ -222,7 +222,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Role-Based Access Card */}
-          <div className="bg-zinc-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-zinc-700/50 overflow-hidden">
+          {/* <div className="bg-zinc-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-zinc-700/50 overflow-hidden">
             <div
               className={`${
                 session?.user.role === "admin"
@@ -358,7 +358,7 @@ export default function DashboardPage() {
                 applications.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Nav */}

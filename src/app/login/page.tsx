@@ -18,45 +18,42 @@ export default function LoginPage() {
 
   // Handle error messages from NextAuth
   useEffect(() => {
-    if (errorType) {
-      switch (errorType) {
-        case "CredentialsSignin":
-          setError("Invalid email or password");
-          break;
-        case "SessionRequired":
-          setError("You need to be signed in to access this page");
-          break;
-        default:
-          setError("An authentication error occurred");
-      }
-    }
+    // if (errorType) {
+    //   switch (errorType) {
+    //     case "CredentialsSignin":
+    //       setError("Invalid email or password");
+    //       break;
+    //     case "SessionRequired":
+    //       setError("You need to be signed in to access this page");
+    //       break;
+    //     default:
+    //       setError("An authentication error occurred");
+    //   }
+    // }
   }, [errorType]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setIsLoading(true);
-
-    try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError("Invalid email or password");
-        setIsLoading(false);
-        return;
-      }
-
-      // Redirect to the requested page or dashboard
-      router.push(redirect);
-    } catch (error) {
-      setError("An unexpected error occurred");
-      setIsLoading(false);
-      console.error("Login error:", error);
-    }
+    // e.preventDefault();
+    // setError("");
+    // setIsLoading(true);
+    // try {
+    //   const result = await signIn("credentials", {
+    //     email,
+    //     password,
+    //     redirect: false,
+    //   });
+    //   if (result?.error) {
+    //     setError("Invalid email or password");
+    //     setIsLoading(false);
+    //     return;
+    //   }
+    //   // Redirect to the requested page or dashboard
+    //   router.push(redirect);
+    // } catch (error) {
+    //   setError("An unexpected error occurred");
+    //   setIsLoading(false);
+    //   console.error("Login error:", error);
+    // }
   };
 
   return (
