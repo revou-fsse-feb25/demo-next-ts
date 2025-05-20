@@ -1,26 +1,248 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f5f5f5;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --card-bg: #ffffff;
+  --card-text: #171717;
+  --error: #ef4444;
+  --success: #10b981;
+  --code-bg: #f3f4f6;
+  --code-text: #111827;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #6b7280;
+  --secondary-hover: #4b5563;
+  --card-hover: #f9fafb;
+  --border: #e5e7eb;
+  --input-bg: #ffffff;
+  --input-text: #171717;
+  --input-border: #d1d5db;
+  --input-focus-border: #3b82f6;
+  --input-placeholder: #9ca3af;
+  --header-bg-from: #1f2937;
+  --header-bg-to: #111827;
+  --header-text: #f9fafb;
+  --highlight: rgba(59, 130, 246, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --card-bg: #1e293b;
+    --card-text: #f1f5f9;
+    --error: #f87171;
+    --success: #34d399;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+    --secondary: #cbd5e1;
+    --secondary-hover: #f1f5f9;
+    --card-hover: #334155;
+    --border: #475569;
+    --input-bg: #1e293b;
+    --input-text: #f1f5f9;
+    --input-border: #475569;
+    --input-focus-border: #60a5fa;
+    --input-placeholder: #94a3b8;
+    --header-bg-from: #0f172a;
+    --header-bg-to: #1e293b;
+    --header-text: #f8fafc;
+    --highlight: rgba(59, 130, 246, 0.15);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.bg-white {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bg-white:hover {
+  background-color: var(--card-hover);
+}
+
+pre,
+.bg-gray-100 {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+}
+
+.text-gray-700 {
+  color: var(--card-text);
+}
+
+.text-gray-600,
+.text-gray-500 {
+  color: var(--secondary);
+}
+
+.border-gray-300,
+.border-gray-200 {
+  border-color: var(--border);
+}
+
+.text-blue-600 {
+  color: var(--primary);
+}
+
+.bg-gray-50 {
+  background-color: var(--card-hover);
+}
+
+.bg-blue-50 {
+  background-color: var(--highlight);
+}
+
+.bg-blue-100 {
+  background-color: var(--highlight);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-error {
+  color: var(--error);
+}
+
+/* Enhanced button styles */
+.bg-blue-500 {
+  background-color: var(--primary);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.bg-blue-500:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.bg-blue-500:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.bg-green-500 {
+  background-color: var(--success);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.bg-green-500:hover:not(:disabled) {
+  background-color: var(--success);
+  filter: brightness(110%);
+  transform: translateY(-1px);
+}
+
+.bg-green-500:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.shadow-md:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Form input focus styles */
+input,
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+  border-color: transparent;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
+/* Link hover effects */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* Header and footer styles */
+.bg-gradient-to-r.from-gray-900.to-gray-800 {
+  background: linear-gradient(
+    to right,
+    var(--header-bg-from),
+    var(--header-bg-to)
+  );
+  color: var(--header-text);
+}
+
+/* Fix icon contrast in dark mode */
+.text-gray-400 {
+  color: var(--secondary);
+}
+
+/* Fix code block and syntax highlighting */
+.language-typescript,
+.language-javascript {
+  color: var(--code-text);
+}
+
+/* Improved button disabled state */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Fix form validation styling */
+.border-red-500 {
+  border-color: var(--error);
+}
+
+/* Fix info/alert boxes */
+.bg-blue-50.border-l-4.border-blue-500 {
+  background-color: var(--highlight);
+  border-color: var(--primary);
+}
+
+/* Fix text contrast in cards */
+.border.border-gray-200.rounded-lg.p-4 {
+  border-color: var(--border);
+}
+
+/* Fix hover states for better visibility */
+.hover\:bg-gray-50:hover {
+  background-color: var(--card-hover);
+}
+
+.hover\:border-blue-300:hover {
+  border-color: var(--primary);
 }
