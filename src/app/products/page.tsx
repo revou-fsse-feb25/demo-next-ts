@@ -67,9 +67,9 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <motion.h1
-        className="text-3xl font-bold mb-6 text-text-light dark:text-text-dark"
+        className="text-3xl font-bold mb-8 text-text-light dark:text-white text-center sm:text-left"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -78,15 +78,15 @@ export default function ProductsPage() {
       </motion.h1>
 
       <motion.div
-        className="bg-card-light dark:bg-card-dark rounded-lg shadow-md p-6 mb-6"
+        className="bg-card-light dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8 border border-gray-200 dark:border-gray-700"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <p className="text-gray-600 dark:text-gray-300">
-          This page demonstrates the use of Context API for managing a shopping
-          cart. When you add items to your cart, the counter in the navigation
-          bar updates automatically.
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Browse our selection of high-quality products. Adding items to your
+          cart will update the count in the navigation bar instantly, thanks to
+          our Context API-powered state management.
         </p>
       </motion.div>
 

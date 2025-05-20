@@ -29,12 +29,12 @@ export default function CartPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-text-light dark:text-text-dark">
+    <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-bold mb-8 text-text-light dark:text-white text-center sm:text-left">
         Shopping Cart
       </h1>
 
-      <div className="bg-card-light dark:bg-card-dark rounded-lg shadow-md p-6">
+      <div className="bg-card-light dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
         {totalItems > 0 ? (
           <>
             <motion.div
@@ -50,17 +50,17 @@ export default function CartPage() {
               ))}
             </motion.div>
 
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-lg font-semibold text-text-light dark:text-text-dark">
                   Total:
                 </span>
-                <span className="text-lg font-bold text-primary-light dark:text-primary-dark">
+                <span className="text-xl font-bold text-green-600 dark:text-green-400">
                   ${totalPrice.toFixed(2)}
                 </span>
               </div>
 
-              <button className="w-full py-3 bg-primary-light dark:bg-primary-dark text-white rounded-md hover:bg-opacity-90 dark:hover:bg-opacity-90 transition-all transform hover:scale-[1.01] active:scale-[0.99]">
+              <button className="w-full py-3 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-md font-bold shadow-md transition-all transform hover:scale-[1.01] active:scale-[0.99]">
                 Checkout
               </button>
             </div>
@@ -92,15 +92,15 @@ export default function CartPage() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <h2 className="text-xl font-semibold text-text-light dark:text-text-dark mb-2">
+              <h2 className="text-xl font-semibold text-text-light dark:text-white mb-2">
                 Your cart is empty
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 mb-6">
+              <p className="text-gray-700 dark:text-gray-300 mb-6">
                 Looks like you haven't added any products to your cart yet.
               </p>
               <Link
                 href="/products"
-                className="inline-block py-2 px-6 bg-primary-light dark:bg-primary-dark text-white rounded-md hover:bg-opacity-90 dark:hover:bg-opacity-90 transition-all transform hover:scale-105"
+                className="inline-block py-3 px-6 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white font-semibold rounded-md shadow-md transition-all transform hover:scale-105"
               >
                 Browse Products
               </Link>
@@ -109,15 +109,15 @@ export default function CartPage() {
         )}
       </div>
 
-      <div className="mt-8 bg-blue-50 dark:bg-blue-900/30 rounded-lg p-6">
-        <h2 className="text-xl font-bold mb-3 text-blue-800 dark:text-blue-200">
+      <div className="mt-8 bg-blue-50 dark:bg-gray-700 rounded-lg p-6 border border-blue-200 dark:border-gray-700 shadow-sm">
+        <h2 className="text-xl font-bold mb-3 text-blue-700 dark:text-blue-300">
           Context API in Action
         </h2>
-        <p className="text-blue-700 dark:text-blue-300 mb-2">
+        <p className="text-blue-700 dark:text-blue-300 leading-relaxed">
           This cart page demonstrates how Context API allows components to
           access shared state without props drilling:
         </p>
-        <ul className="list-disc pl-5 text-blue-700 dark:text-blue-300 space-y-1">
+        <ul className="list-disc pl-5 text-blue-700 dark:text-blue-300 space-y-1.5 mt-2">
           <li>The cart data is stored in CartContext</li>
           <li>
             Any component can access or modify the cart using the useCart() hook

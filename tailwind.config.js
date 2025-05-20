@@ -10,24 +10,24 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          light: "#4338ca", // indigo-700 - darker for better contrast in light mode
-          dark: "#6366f1", // indigo-500
+          light: "#2563eb", // blue-600
+          dark: "#60a5fa", // blue-400
         },
         secondary: {
           light: "#0369a1", // sky-700
-          dark: "#38bdf8", // sky-400
+          dark: "#7dd3fc", // sky-300
         },
         background: {
-          light: "#f8fafc", // slate-50
-          dark: "#0f172a", // slate-900
+          light: "#f9fafb", // gray-50 (a very light gray for main page background)
+          dark: "#111827", // gray-900
         },
         card: {
-          light: "#ffffff", // white
-          dark: "#1e293b", // slate-800
+          light: "#ffffff", // white (for cards and distinct sections)
+          dark: "#1f2937", // gray-800
         },
         text: {
-          light: "#0f172a", // slate-900
-          dark: "#f1f5f9", // slate-100
+          light: "#1f2937", // gray-800 (strong dark gray for text in light mode)
+          dark: "#ffffff", // white
         },
       },
       animation: {

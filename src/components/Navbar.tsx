@@ -24,23 +24,23 @@ const Navbar = () => {
   }, [totalItems, prevTotalItems]);
 
   return (
-    <nav className="sticky top-0 z-10 bg-card-light dark:bg-card-dark border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    <nav className="sticky top-0 z-10 bg-card-light dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-xl font-bold text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors"
+              className="text-xl font-bold text-primary-light dark:text-white hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
             >
               NextShop
             </Link>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-5">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors shadow-sm border border-gray-200 dark:border-gray-600"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -61,7 +61,7 @@ const Navbar = () => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-gray-600"
+                  className="h-5 w-5 text-gray-700"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -79,13 +79,13 @@ const Navbar = () => {
             {/* Navigation Links */}
             <Link
               href="/"
-              className="text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors"
+              className="font-medium text-text-light dark:text-white hover:text-primary-light dark:hover:text-primary-dark transition-colors"
             >
               Home
             </Link>
             <Link
               href="/products"
-              className="text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors"
+              className="font-medium text-text-light dark:text-white hover:text-primary-light dark:hover:text-primary-dark transition-colors"
             >
               Products
             </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
             {/* Cart Icon with Counter */}
             <Link
               href="/cart"
-              className={`relative p-2 text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors ${
+              className={`relative p-2 text-text-light dark:text-white hover:text-primary-light dark:hover:text-primary-dark transition-colors ${
                 isCartHighlighted ? "animate-pulse" : ""
               }`}
             >
@@ -113,7 +113,7 @@ const Navbar = () => {
               </svg>
               {totalItems > 0 && (
                 <span
-                  className={`absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full ${
+                  className={`absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-green-600 dark:bg-green-500 rounded-full ${
                     isCartHighlighted ? "animate-bounce" : ""
                   }`}
                 >

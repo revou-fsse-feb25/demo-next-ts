@@ -24,8 +24,10 @@ export const useTheme = () => useContext(ThemeContext);
 
 // Provider component
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  // Use localStorage to persist theme preference, defaulting to system preference
+  // State to track dark mode
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  // Track if we've loaded the theme from localStorage
+  const [isThemeLoaded, setIsThemeLoaded] = useState<boolean>(false);
 
   // Initialize theme based on user preference
   useEffect(() => {
@@ -41,13 +43,20 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       ).matches;
       setIsDarkMode(prefersDark);
     }
+
+    setIsThemeLoaded(true);
   }, []);
 
   // Update document when theme changes
   useEffect(() => {
+    if (!isThemeLoaded) return;
+
+    // Apply dark mode class to html element
     document.documentElement.classList.toggle("dark", isDarkMode);
+
+    // Save preference to localStorage
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
+  }, [isDarkMode, isThemeLoaded]);
 
   // Toggle theme function
   const toggleTheme = () => {
