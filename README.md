@@ -1,24 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextAuth.js Demo Project
+
+This is a demo project showcasing authentication with NextAuth.js, including role-based access control (user and admin roles) and a product management dashboard for admin users.
+
+## Features
+
+- User authentication with NextAuth.js
+- Role-based access control (user and admin roles)
+- Protected routes based on authentication status and user role
+- Admin dashboard with product management (CRUD operations)
+- Integration with external API (Platzi Fake Store API)
+- Search and pagination functionality
+
+## Demo Credentials
+
+- Admin User:
+  - Email: admin@example.com
+  - Password: admin123
+
+- Regular User:
+  - Email: user@example.com
+  - Password: user123
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Create a `.env.local` file in the root directory with the following content:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-for-jwt-encryption
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+
+```bash
+pnpm dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Structure
+
+- `/src/app/api/auth/[...nextauth]/route.ts` - NextAuth.js API route handler
+- `/src/middleware.ts` - Middleware for route protection
+- `/src/providers/SessionProvider.tsx` - NextAuth.js session provider
+- `/src/types/next-auth.d.ts` - TypeScript declarations for NextAuth.js
+- `/src/app/login/page.tsx` - Login page
+- `/src/app/register/page.tsx` - Registration page
+- `/src/app/home/page.tsx` - User home page
+- `/src/app/admin/page.tsx` - Admin dashboard
+- `/src/components/Navigation.tsx` - Navigation component
+- `/src/components/ProductTable.tsx` - Product table component
+- `/src/components/ProductForm.tsx` - Product form component
+- `/src/services/productService.ts` - Service for product API calls
+- `/src/types/product.ts` - Product type definitions
+
+## Technologies Used
+
+- Next.js 15
+- TypeScript
+- NextAuth.js
+- React
+- Tailwind CSS
+- Axios
 
 ## Learn More
 
