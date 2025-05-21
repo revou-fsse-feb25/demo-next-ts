@@ -9,6 +9,17 @@ export default async function middleware(req: NextRequestWithAuth) {
     req.nextUrl.pathname.startsWith("/login") ||
     req.nextUrl.pathname.startsWith("/register");
 
+  // Root path - redirect based on auth status
+  if (req.nextUrl.pathname === "/") {
+    if (isAuthenticated) {
+      const role = token.role as string;
+      const redirectUrl = role === "admin" ? "/admin" : "/home";
+      return NextResponse.redirect(new URL(redirectUrl, req.url));
+    } else {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+  }
+
   // Redirect authenticated users away from auth pages
   if (isAuthenticated && isAuthPage) {
     const role = token.role as string;
@@ -34,5 +45,5 @@ export default async function middleware(req: NextRequestWithAuth) {
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/home/:path*", "/admin/:path*"],
+  matcher: ["/", "/login", "/register", "/home/:path*", "/admin/:path*"],
 };

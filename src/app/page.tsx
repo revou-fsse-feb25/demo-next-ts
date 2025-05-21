@@ -21,10 +21,17 @@ export default function Home() {
   }, [status, session, router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900">NextAuth.js Demo</h1>
-        <p className="mt-2 text-lg text-gray-600">Redirecting...</p>
+        <h1 className="text-3xl font-bold text-white">NextAuth.js Demo</h1>
+        <div className="mt-6">
+          <div className="animate-pulse flex space-x-4 justify-center">
+            <div className="rounded-full bg-blue-600 h-3 w-3"></div>
+            <div className="rounded-full bg-blue-600 h-3 w-3"></div>
+            <div className="rounded-full bg-blue-600 h-3 w-3"></div>
+          </div>
+          <p className="mt-4 text-lg text-gray-300">Redirecting...</p>
+        </div>
       </div>
     </div>
   );
