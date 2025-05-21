@@ -11,12 +11,13 @@ export default function Home() {
       <div className="space-y-8">
         <section className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
           <h2 className="text-2xl font-semibold mb-4 flex items-center">
-            <span className="inline-block w-8 h-8 mr-2 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            <span className="inline-flex items-center justify-center w-8 h-8 mr-2 rounded-full bg-blue-500 flex-shrink-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-5 h-5"
+                className="w-5 h-5 text-white"
+                aria-hidden="true"
               >
                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                 <path
@@ -37,12 +38,13 @@ export default function Home() {
 
         <section className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
           <h2 className="text-2xl font-semibold mb-4 flex items-center">
-            <span className="inline-block w-8 h-8 mr-2 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            <span className="inline-flex items-center justify-center w-8 h-8 mr-2 rounded-full bg-blue-500 flex-shrink-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-5 h-5"
+                className="w-5 h-5 text-white"
+                aria-hidden="true"
               >
                 <path
                   fillRule="evenodd"
@@ -58,12 +60,13 @@ export default function Home() {
             <Link href="/fetch-demo" className="block">
               <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300 hover:border-blue-300 hover:shadow-md transform hover:-translate-y-1">
                 <h3 className="text-xl font-medium text-blue-600 mb-2 flex items-center">
-                  <span className="inline-block w-6 h-6 mr-2 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-blue-100 flex-shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-4 h-4"
+                      className="w-4 h-4 text-blue-600"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -86,12 +89,13 @@ export default function Home() {
             <Link href="/swr-demo" className="block">
               <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300 hover:border-blue-300 hover:shadow-md transform hover:-translate-y-1">
                 <h3 className="text-xl font-medium text-blue-600 mb-2 flex items-center">
-                  <span className="inline-block w-6 h-6 mr-2 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-blue-100 flex-shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-4 h-4"
+                      className="w-4 h-4 text-blue-600"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -116,12 +120,13 @@ export default function Home() {
             <Link href="/form-demo" className="block">
               <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300 hover:border-blue-300 hover:shadow-md transform hover:-translate-y-1">
                 <h3 className="text-xl font-medium text-blue-600 mb-2 flex items-center">
-                  <span className="inline-block w-6 h-6 mr-2 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-blue-100 flex-shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-4 h-4"
+                      className="w-4 h-4 text-blue-600"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -146,12 +151,13 @@ export default function Home() {
             <Link href="/debounce-demo" className="block">
               <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-all duration-300 hover:border-blue-300 hover:shadow-md transform hover:-translate-y-1">
                 <h3 className="text-xl font-medium text-blue-600 mb-2 flex items-center">
-                  <span className="inline-block w-6 h-6 mr-2 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <span className="inline-flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-blue-100 flex-shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-4 h-4"
+                      className="w-4 h-4 text-blue-600"
+                      aria-hidden="true"
                     >
                       <path
                         fillRule="evenodd"
@@ -175,12 +181,13 @@ export default function Home() {
 
         <section className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
           <h2 className="text-2xl font-semibold mb-4 flex items-center">
-            <span className="inline-block w-8 h-8 mr-2 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            <span className="inline-flex items-center justify-center w-8 h-8 mr-2 rounded-full bg-blue-500 flex-shrink-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-5 h-5"
+                className="w-5 h-5 text-white"
+                aria-hidden="true"
               >
                 <path
                   fillRule="evenodd"
@@ -202,7 +209,8 @@ export default function Home() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-5 h-5 mr-2 text-blue-500"
+                className="w-5 h-5 mr-2 text-blue-500 flex-shrink-0"
+                aria-hidden="true"
               >
                 <path
                   fillRule="evenodd"

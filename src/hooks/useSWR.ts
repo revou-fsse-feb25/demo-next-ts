@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface UseSWRState<T> {
   data: T | null;
@@ -13,6 +13,11 @@ interface UseSWROptions {
   revalidateOnFocus?: boolean;
 }
 
+interface CacheData<T> {
+  data: T;
+  timestamp: number;
+}
+
 export function useSWR<T>(
   key: string,
   fetcher: (key: string) => Promise<T>,
@@ -24,6 +29,19 @@ export function useSWR<T>(
     revalidateOnFocus = true,
   } = options;
 
+  // Use refs to track state without causing re-renders
+  const keyRef = useRef(key);
+  const isValidatingRef = useRef(false);
+  const fetcherRef = useRef(fetcher);
+  const optionsRef = useRef(options);
+
+  // Update refs when dependencies change
+  useEffect(() => {
+    keyRef.current = key;
+    fetcherRef.current = fetcher;
+    optionsRef.current = options;
+  }, [key, fetcher, options]);
+
   const [state, setState] = useState<UseSWRState<T>>({
     data: null,
     loading: true,
@@ -32,13 +50,15 @@ export function useSWR<T>(
   });
 
   // Cache key for this request
-  const cacheKey = JSON.stringify(key);
+  const cacheKey = `swr-${JSON.stringify(key)}`;
 
   // Function to fetch the data
   const fetchData = useCallback(
     async (shouldUpdateLoading = true) => {
       // If already validating, don't trigger another fetch
-      if (state.isValidating) return;
+      if (isValidatingRef.current) return;
+
+      isValidatingRef.current = true;
 
       try {
         // Set loading state
@@ -49,7 +69,7 @@ export function useSWR<T>(
         }
 
         // Fetch the data
-        const data = await fetcher(key);
+        const data = await fetcherRef.current(keyRef.current);
 
         // Update state with the fetched data
         setState({
@@ -60,13 +80,17 @@ export function useSWR<T>(
         });
 
         // Store in session storage for caching
-        sessionStorage.setItem(
-          `swr-${cacheKey}`,
-          JSON.stringify({
-            data,
-            timestamp: Date.now(),
-          })
-        );
+        try {
+          sessionStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data,
+              timestamp: Date.now(),
+            })
+          );
+        } catch (e) {
+          // Ignore storage errors
+        }
       } catch (error) {
         if (error instanceof Error) {
           setState({
@@ -83,41 +107,63 @@ export function useSWR<T>(
             isValidating: false,
           });
         }
+      } finally {
+        isValidatingRef.current = false;
       }
     },
-    [key, fetcher, state.isValidating, cacheKey]
+    [cacheKey] // Reduced dependencies
   );
 
   // Effect for initial data fetching and cache retrieval
   useEffect(() => {
-    // Try to get data from cache
-    const cachedData = sessionStorage.getItem(`swr-${cacheKey}`);
+    let isMounted = true;
 
-    if (cachedData) {
+    const loadInitialData = async () => {
+      // Try to get data from cache
+      let cachedData: string | null = null;
+
       try {
-        const { data, timestamp } = JSON.parse(cachedData);
-
-        // Check if cache is still valid
-        if (Date.now() - timestamp < dedupingInterval) {
-          // Use cached data
-          setState({
-            data,
-            loading: false,
-            error: null,
-            isValidating: false,
-          });
-
-          // Revalidate in background
-          fetchData(false);
-          return;
-        }
+        cachedData = sessionStorage.getItem(cacheKey);
       } catch (e) {
-        // Invalid cache, proceed with normal fetching
+        // Ignore storage errors
       }
-    }
 
-    // No valid cache, fetch data normally
-    fetchData();
+      if (cachedData) {
+        try {
+          const { data, timestamp } = JSON.parse(cachedData) as CacheData<T>;
+
+          // Check if cache is still valid
+          if (Date.now() - timestamp < dedupingInterval) {
+            // Use cached data only if component is still mounted
+            if (isMounted) {
+              setState({
+                data,
+                loading: false,
+                error: null,
+                isValidating: false,
+              });
+
+              // Revalidate in background
+              fetchData(false);
+              return;
+            }
+          }
+        } catch (e) {
+          // Invalid cache, proceed with normal fetching
+        }
+      }
+
+      // No valid cache, fetch data normally
+      if (isMounted) {
+        fetchData();
+      }
+    };
+
+    loadInitialData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [cacheKey, dedupingInterval, fetchData]);
 
   // Effect for refresh interval
@@ -159,13 +205,17 @@ export function useSWR<T>(
         }));
 
         // Update the cache
-        sessionStorage.setItem(
-          `swr-${cacheKey}`,
-          JSON.stringify({
-            data: newData,
-            timestamp: Date.now(),
-          })
-        );
+        try {
+          sessionStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: newData,
+              timestamp: Date.now(),
+            })
+          );
+        } catch (e) {
+          // Ignore storage errors
+        }
       }
 
       // Revalidate from the server

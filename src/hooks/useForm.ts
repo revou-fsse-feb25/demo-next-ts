@@ -1,4 +1,11 @@
-import { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import {
+  useState,
+  useCallback,
+  ChangeEvent,
+  FormEvent,
+  useMemo,
+  useRef,
+} from "react";
 
 type ValidationRule<T> = {
   validate: (value: any, formValues: T) => boolean;
@@ -46,17 +53,27 @@ export function useForm<T extends Record<string, any>>({
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  // Use refs to avoid unnecessary re-renders
+  const validationRef = useRef(validation);
+  const onSubmitRef = useRef(onSubmit);
+
+  // Update refs when dependencies change
+  useMemo(() => {
+    validationRef.current = validation;
+    onSubmitRef.current = onSubmit;
+  }, [validation, onSubmit]);
+
   // Validate a specific field
   const validateField = useCallback(
-    (name: string, value: any) => {
-      const fieldValidations = validation[name];
+    (name: string, value: any, currentValues: T) => {
+      const fieldValidations = validationRef.current[name];
       if (!fieldValidations) return [];
 
       return fieldValidations
-        .filter((rule) => !rule.validate(value, values))
+        .filter((rule) => !rule.validate(value, currentValues))
         .map((rule) => rule.message);
     },
-    [validation, values]
+    [] // No dependencies since we use refs
   );
 
   // Validate all fields
@@ -64,9 +81,9 @@ export function useForm<T extends Record<string, any>>({
     const newErrors: FormErrors = {};
     let isValid = true;
 
-    Object.keys(validation).forEach((fieldName) => {
+    Object.keys(validationRef.current).forEach((fieldName) => {
       const value = values[fieldName];
-      const fieldErrors = validateField(fieldName, value);
+      const fieldErrors = validateField(fieldName, value, values);
 
       if (fieldErrors.length > 0) {
         newErrors[fieldName] = fieldErrors;
@@ -76,7 +93,7 @@ export function useForm<T extends Record<string, any>>({
 
     setErrors(newErrors);
     return isValid;
-  }, [validation, validateField, values]);
+  }, [values, validateField]);
 
   // Handle input change
   const handleChange = useCallback(
@@ -93,19 +110,20 @@ export function useForm<T extends Record<string, any>>({
         parsedValue = value === "" ? "" : Number(value);
       }
 
-      setValues((prev) => ({
-        ...prev,
-        [name]: parsedValue,
-      }));
+      setValues((prev) => {
+        const newValues = { ...prev, [name]: parsedValue };
 
-      // Validate the field on change if it's been touched
-      if (touched[name]) {
-        const fieldErrors = validateField(name, parsedValue);
-        setErrors((prev) => ({
-          ...prev,
-          [name]: fieldErrors,
-        }));
-      }
+        // Validate the field on change if it's been touched
+        if (touched[name]) {
+          const fieldErrors = validateField(name, parsedValue, newValues);
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: fieldErrors,
+          }));
+        }
+
+        return newValues;
+      });
     },
     [touched, validateField]
   );
@@ -124,30 +142,31 @@ export function useForm<T extends Record<string, any>>({
       }));
 
       // Validate field on blur
-      const fieldErrors = validateField(name, value);
+      const fieldErrors = validateField(name, value, values);
       setErrors((prev) => ({
         ...prev,
         [name]: fieldErrors,
       }));
     },
-    [validateField]
+    [values, validateField]
   );
 
   // Manually set a field value
   const setFieldValue = useCallback(
     (name: string, value: any) => {
-      setValues((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setValues((prev) => {
+        const newValues = { ...prev, [name]: value };
 
-      if (touched[name]) {
-        const fieldErrors = validateField(name, value);
-        setErrors((prev) => ({
-          ...prev,
-          [name]: fieldErrors,
-        }));
-      }
+        if (touched[name]) {
+          const fieldErrors = validateField(name, value, newValues);
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: fieldErrors,
+          }));
+        }
+
+        return newValues;
+      });
     },
     [touched, validateField]
   );
@@ -179,16 +198,20 @@ export function useForm<T extends Record<string, any>>({
         setIsSubmitting(true);
 
         // Call the provided onSubmit function
-        Promise.resolve(onSubmit(values, { resetForm })).finally(() => {
-          setIsSubmitting(false);
-        });
+        Promise.resolve(onSubmitRef.current(values, { resetForm })).finally(
+          () => {
+            setIsSubmitting(false);
+          }
+        );
       }
     },
-    [values, validateForm, onSubmit, resetForm]
+    [values, validateForm, resetForm]
   );
 
-  // Check if the form is valid
-  const isValid = Object.keys(errors).length === 0;
+  // Check if the form is valid - memoize this calculation
+  const isValid = useMemo(() => {
+    return Object.keys(errors).length === 0;
+  }, [errors]);
 
   return {
     values,
