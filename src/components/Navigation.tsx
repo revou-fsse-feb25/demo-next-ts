@@ -16,6 +16,7 @@ const Navigation = () => {
     { path: "/02-jest-intro", label: "2. Jest Introduction" },
     { path: "/03-testing-functions", label: "3. Testing Functions" },
     { path: "/04-component-testing", label: "4. Component Testing" },
+    { path: "/05-user-interactions", label: "5. User Interactions" },
   ];
 
   return (
