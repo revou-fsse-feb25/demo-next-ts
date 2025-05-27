@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeAll, afterEach, afterAll } from "vitest";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import {
@@ -78,7 +79,7 @@ describe("API Service", () => {
 
   // Testing async functions - fetchProducts
   describe("fetchProducts", () => {
-    test("should fetch products successfully", async () => {
+    it("should fetch products successfully", async () => {
       // Call the function
       const result = await fetchProducts();
 
@@ -87,7 +88,7 @@ describe("API Service", () => {
       expect(result.length).toBe(2);
     });
 
-    test("should throw error when API returns non-ok response", async () => {
+    it("should throw error when API returns non-ok response", async () => {
       // Override the handler for this test
       server.use(
         http.get("https://api.escuelajs.co/api/v1/products", () => {
@@ -99,7 +100,7 @@ describe("API Service", () => {
       await expect(fetchProducts()).rejects.toThrow("API error: 500");
     });
 
-    test("should throw error when fetch fails", async () => {
+    it("should throw error when fetch fails", async () => {
       // Override the handler for this test
       server.use(
         http.get("https://api.escuelajs.co/api/v1/products", () => {
@@ -114,7 +115,7 @@ describe("API Service", () => {
 
   // Testing async functions with parameters - searchProductsByTitle
   describe("searchProductsByTitle", () => {
-    test("should search products by title successfully", async () => {
+    it("should search products by title successfully", async () => {
       // Call the function with a search term
       const result = await searchProductsByTitle("Generic");
 
@@ -123,14 +124,14 @@ describe("API Service", () => {
       expect(result[0].title).toBe("Generic Product");
     });
 
-    test("should throw error when title parameter is empty", async () => {
+    it("should throw error when title parameter is empty", async () => {
       // Expect the function to throw an error for empty title
       await expect(searchProductsByTitle("")).rejects.toThrow(
         "Title parameter is required"
       );
     });
 
-    test("should handle empty search results", async () => {
+    it("should handle empty search results", async () => {
       // Call the function
       const result = await searchProductsByTitle("NonExistentProduct");
 
@@ -142,7 +143,7 @@ describe("API Service", () => {
 
   // Testing error handling in advanced functions
   describe("calculateProductStats", () => {
-    test("should calculate product statistics correctly", () => {
+    it("should calculate product statistics correctly", () => {
       // Call the function
       const stats = calculateProductStats(mockProducts);
 
@@ -155,21 +156,21 @@ describe("API Service", () => {
       expect(stats.categoryCounts).toEqual({ "Category 1": 2 });
     });
 
-    test("should throw error when products array is empty", () => {
+    it("should throw error when products array is empty", () => {
       // Expect the function to throw an error for empty array
       expect(() => calculateProductStats([])).toThrow(
         "Valid products array is required"
       );
     });
 
-    test("should throw error when products parameter is null", () => {
+    it("should throw error when products parameter is null", () => {
       // Expect the function to throw an error for null
       expect(() => calculateProductStats(null as unknown as Product[])).toThrow(
         "Valid products array is required"
       );
     });
 
-    test("should throw error when products parameter is undefined", () => {
+    it("should throw error when products parameter is undefined", () => {
       // Expect the function to throw an error for undefined
       expect(() =>
         calculateProductStats(undefined as unknown as Product[])
@@ -179,7 +180,7 @@ describe("API Service", () => {
 
   // Advanced testing with MSW
   describe("Advanced testing techniques", () => {
-    test("should handle network errors properly", async () => {
+    it("should handle network errors properly", async () => {
       // Override the handler to simulate a network error
       server.use(
         http.get("https://api.escuelajs.co/api/v1/products", () => {
@@ -191,7 +192,7 @@ describe("API Service", () => {
       await expect(fetchProducts()).rejects.toThrow();
     });
 
-    test("should handle retry logic for network errors", async () => {
+    it("should handle retry logic for network errors", async () => {
       // Setup a counter to track request attempts
       let attemptCount = 0;
 
