@@ -7,7 +7,7 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const isActive = (path: string) => {
-    return pathname === path;
+    return pathname === path || pathname?.startsWith(path + "/");
   };
 
   const navItems = [
@@ -17,6 +17,7 @@ const Navigation = () => {
     { path: "/03-testing-functions", label: "3. Testing Functions" },
     { path: "/04-component-testing", label: "4. Component Testing" },
     { path: "/05-user-interactions", label: "5. User Interactions" },
+    { path: "/06-api-testing", label: "6. API Testing" },
   ];
 
   return (
