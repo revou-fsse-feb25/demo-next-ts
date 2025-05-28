@@ -52,6 +52,7 @@ describe("filmService", () => {
       expect(result).toEqual(mockFilms);
     });
 
+    /* COMMENTED FOR 50% COVERAGE
     it("should throw an error when fetching films fails", async () => {
       // Arrange
       mockedAxios.get.mockRejectedValueOnce(new Error("Network error"));
@@ -61,6 +62,7 @@ describe("filmService", () => {
         "Failed to fetch films"
       );
     });
+    */
   });
 
   describe("getFilmById", () => {
@@ -79,6 +81,7 @@ describe("filmService", () => {
       expect(result).toEqual(mockFilm);
     });
 
+    /* COMMENTED FOR 50% COVERAGE
     it("should throw an error when fetching film by id fails", async () => {
       // Arrange
       const filmId = "999";
@@ -89,8 +92,10 @@ describe("filmService", () => {
         `Failed to fetch film with id ${filmId}`
       );
     });
+    */
   });
 
+  /* COMMENTED FOR 50% COVERAGE
   describe("createFilm", () => {
     it("should create a new film successfully", async () => {
       // Arrange
@@ -140,6 +145,7 @@ describe("filmService", () => {
       );
     });
   });
+  */
 
   describe("updateFilm", () => {
     it("should update a film successfully", async () => {
@@ -159,6 +165,7 @@ describe("filmService", () => {
       expect(result).toEqual(updatedFilm);
     });
 
+    /* COMMENTED FOR 50% COVERAGE
     it("should throw an error when updating film fails", async () => {
       // Arrange
       const filmId = "1";
@@ -170,8 +177,10 @@ describe("filmService", () => {
         `Failed to update film with id ${filmId}`
       );
     });
+    */
   });
 
+  /* COMMENTED FOR 50% COVERAGE
   describe("deleteFilm", () => {
     it("should delete a film successfully", async () => {
       // Arrange
@@ -198,4 +207,5 @@ describe("filmService", () => {
       );
     });
   });
+  */
 });

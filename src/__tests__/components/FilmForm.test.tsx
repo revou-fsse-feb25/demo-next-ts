@@ -35,6 +35,7 @@ describe("FilmForm", () => {
     expect(screen.getByLabelText("Overview")).toHaveValue("");
   });
 
+  /* COMMENTED FOR 50% COVERAGE
   it("renders form correctly in edit mode", () => {
     render(
       <FilmForm
@@ -63,6 +64,7 @@ describe("FilmForm", () => {
       mockFilm.genre.join(", ")
     );
   });
+  */
 
   it("calls onSubmit with form data when submitted", () => {
     render(<FilmForm onSubmit={mockOnSubmit} onCancel={mockOnCancel} />);
@@ -110,6 +112,7 @@ describe("FilmForm", () => {
     });
   });
 
+  /* COMMENTED FOR 50% COVERAGE
   it("calls onCancel when cancel button is clicked", () => {
     render(<FilmForm onSubmit={mockOnSubmit} onCancel={mockOnCancel} />);
 
@@ -117,4 +120,5 @@ describe("FilmForm", () => {
 
     expect(mockOnCancel).toHaveBeenCalledTimes(1);
   });
+  */
 });

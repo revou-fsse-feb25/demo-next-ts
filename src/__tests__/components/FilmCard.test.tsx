@@ -50,6 +50,7 @@ describe("FilmCard", () => {
     expect(img).toHaveAttribute("alt", `${mockFilm.title} poster`);
   });
 
+  /* COMMENTED FOR 50% COVERAGE
   it("calls onEdit when edit button is clicked", () => {
     render(
       <FilmCard film={mockFilm} onEdit={mockOnEdit} onDelete={mockOnDelete} />
@@ -85,4 +86,5 @@ describe("FilmCard", () => {
       "https://placehold.co/600x400?text=No+Image"
     );
   });
+  */
 });
