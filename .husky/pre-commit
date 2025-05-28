@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run tests with coverage check
+npm test -- --coverage
+
+# Check if test coverage meets threshold
+if [ $? -ne 0 ]; then
+  echo "❌ Test coverage is below the threshold. Please add more tests."
+  exit 1
+else
+  echo "✅ Test coverage meets the required threshold! Proceeding with commit."
+fi 

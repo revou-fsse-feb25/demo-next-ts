@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Film CRUD Application
+
+A simple application for managing film information with Create, Read, Update, and Delete functionality, built with Next.js and TypeScript.
+
+## Features
+
+- View a list of films
+- Add new films
+- Edit existing films
+- Delete films
+- Complete test coverage
+
+## Technologies Used
+
+- Next.js
+- TypeScript
+- React
+- Axios
+- Jest & React Testing Library
+- Tailwind CSS
+
+## Project Structure
+
+The project follows a structured approach:
+
+- `src/services/filmService.ts` - API service layer for interacting with the backend
+- `src/components/` - React components
+  - `FilmCard.tsx` - Component for displaying individual film information
+  - `FilmForm.tsx` - Form component for creating and editing films
+  - `FilmsPage.tsx` - Main page component with CRUD functionality
+- `src/__tests__/` - Test files organized by type
+  - `services/` - Tests for service layer
+  - `components/` - Tests for React components
+
+## Testing
+
+The project aims for high test coverage, with comprehensive unit tests for:
+
+- Service layer API functions
+- React components
+- Error handling scenarios
+
+Run tests with:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
-## Learn More
+## API Endpoint
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application interacts with a mock API endpoint:
+`https://64ca45bd700d50e3c7049e2f.mockapi.io/film`
